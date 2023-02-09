@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets\css\artist.css">
+    <title>Artist</title>
+</head>
+<body>
+    <h1>Artist</h1>
+    <div class="cardContainer">{{range .}}
+        <div class="card">
+            <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
+            <div class="content">
+                <div style="width: max-content;">
+                    <h1 class="groupeName">{{.Name}}</h1>
+                    <div style="margin-bottom: 1rem;" class="underline"></div>
+                </div>
+                <div class="members">
+                    {{range .Members}}
+                        <p class="text" style="margin: 0;">-{{.}}</p>  
+                    {{end}}   
+                </div>
+                <div style="width: max-content;">
+                    <h1 class="groupeName">Creation date :</h1>
+                    <div style="margin-bottom: 1rem;" class="underline"></div>
+                </div>
+                <p class="text">{{.CreationDate}}</p> 
+                <div style="width: max-content;">
+                    <h1 class="groupeName">First album :</h1>
+                    <div style="margin-bottom: 1rem;" class="underline"></div>
+                </div>       
+                <p class="text">{{.FirstAlbum}}</p> 
+            </div> 
+        </div>                                     
+    {{end}}</div>
+</body>
+</html>

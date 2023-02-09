@@ -1,0 +1,63 @@
+.cardContainer{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    font-family: monospace;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.groupeName{
+    width: max-content;
+    font-size: 1.2rem;
+}
+
+.imgStyle{
+    width: 20rem;
+    height: 15rem;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.card{
+    width: max-content;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* border: 2px solid #333; */
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    font-size: 1rem;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.underline{
+    margin-top: -0.5rem;
+    height: 0.2rem;
+    background-color: #333;
+    border-radius: 999px;
+}
+
+.content{
+    justify-content: center;
+    padding: 1rem;
+}
+
+.text{
+    text-indent: 2rem;
+}
+
+.members{
+    width:max-content;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0rem;
+    /* height: 8rem; */
+}
