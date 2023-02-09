@@ -12,11 +12,15 @@
     <div class="cardsContainer">{{range .}}
         <div class="card">
             <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
+            <div class="groupeName" >
+                <h1 class="title">{{.Name}}</h1>
+            </div>
             <div class="content">
+           
                 <div style="width: max-content;">
                     <div class="containerTitle">
                         <span class="circle"></span>
-                        <h1 class="title">{{.Name}}</h1>
+                        <h2 class="title">Members :</h1>                       
                     </div>
                     <div style="margin-bottom: 1rem;" class="underline"></div>
                 </div>
@@ -28,7 +32,7 @@
                 <div style="width: max-content;">
                     <div class="containerTitle">
                         <span class="circle"></span>
-                        <h1 class="title">Creation date :</h1>                       
+                        <h2 class="title">Creation date :</h1>                       
                     </div>
                     <div style="margin-bottom: 1rem;" class="underline"></div>
                 </div>
@@ -36,7 +40,7 @@
                 <div style="width: max-content;">
                     <div class="containerTitle">
                         <span class="circle"></span>
-                        <h1 class="title">First album :</h1>                       
+                        <h2 class="title">First album :</h1>                       
                     </div>   
                     <div style="margin-bottom: 1rem;" class="underline"></div>
                  </div>    

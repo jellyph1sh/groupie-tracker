@@ -52,7 +52,7 @@ func GetArtist() []byte {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Println(string(body))
+	// fmt.Println(string(body))
 	return body
 }
 
@@ -139,6 +139,7 @@ func GetDate() []byte {
 	res, err := http.DefaultClient.Do(req)
 	defer res.Body.Close()
 	if err != nil {
+		
 		fmt.Println(err)
 		os.Exit(1)
 	}
