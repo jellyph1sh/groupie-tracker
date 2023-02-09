@@ -13,14 +13,23 @@ func homeEvent(homePage *template.Template) {
 	})
 }
 
-func loadTemplates(path string) *template.Template {
+func concertsEvent(concertsPage *template.Template) {
+	var relation = UnMarshallRelation(GetRelation())
+	http.HandleFunc("/concerts", func(w http.ResponseWriter, r *http.Request) {
+		concertsPage.Execute(w, relation)
+	})
+}
+
+func loadTemplates(path string) (*template.Template, *template.Template) {
 	var home = template.Must(template.ParseFiles(path + "index.html"))
-	return home
+	var concerts = template.Must(template.ParseFiles(path + "concerts.html"))
+	return home, concerts
 }
 
 func StartServer() {
-	var homePage = loadTemplates("./templates/")
+	var homePage, concertsPage = loadTemplates("./templates/")
 	homeEvent(homePage)
+	concertsEvent(concertsPage)
 
 	fmt.Println("URL: http://localhost:8080/")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
