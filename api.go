@@ -20,25 +20,20 @@ type Artists []struct {
 	Relations    string
 }
 
-type Locations struct {
-	Index []struct {
-		ID        int
-		Locations []string
-	}
+type Locations []struct {
+	ID        int
+	Locations []string
+	Dates     string
 }
 
-type Dates struct {
-	Index []struct {
-		ID    int
-		Dates []string
-	}
+type Dates []struct {
+	ID    int
+	Dates []string
 }
 
-type Relation struct {
-	Index []struct {
-		ID             int
-		DatesLocations map[string][]string // prend comme clé la ville puis comme valeur un tableau de dates
-	}
+type Relation []struct {
+	ID             int
+	DatesLocations map[string][]string // prend comme clé la ville puis comme valeur un tableau de dates
 }
 
 /*---------------------- Artist API ----------------------*/
@@ -57,7 +52,8 @@ func GetArtist() []byte {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	return body // renvoie un tableau de bytes
+	fmt.Println(string(body))
+	return body
 }
 
 func UnMarshallArtists(data []byte) Artists {
@@ -67,7 +63,6 @@ func UnMarshallArtists(data []byte) Artists {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Println(tab)
 	return tab
 }
 
@@ -88,7 +83,7 @@ func GetLocation() []byte {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	return body
+	return body[9 : len(body)-2]
 }
 
 func UnMarshallLocations(data []byte) Locations {
@@ -120,7 +115,7 @@ func GetRelation() []byte {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	return body
+	return body[9 : len(body)-2]
 }
 
 func UnMarshallRelation(data []byte) Relation {
@@ -152,9 +147,7 @@ func GetDate() []byte {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	// fmt.Println(string(body))
-	// fmt.Println()
-	return body
+	return body[9 : len(body)-2]
 }
 
 func UnMarshallDate(data []byte) Dates {
