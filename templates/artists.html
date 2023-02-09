@@ -9,28 +9,37 @@
 </head>
 <body>
     <h1>Artist</h1>
-    <div class="cardContainer">{{range .}}
+    <div class="cardsContainer">{{range .}}
         <div class="card">
             <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
             <div class="content">
                 <div style="width: max-content;">
-                    <h1 class="groupeName">{{.Name}}</h1>
+                    <div class="containerTitle">
+                        <span class="circle"></span>
+                        <h1 class="title">{{.Name}}</h1>
+                    </div>
                     <div style="margin-bottom: 1rem;" class="underline"></div>
                 </div>
                 <div class="members">
                     {{range .Members}}
-                        <p class="text" style="margin: 0;">-{{.}}</p>  
+                        <p  style="margin: 0; text-indent: 2rem;">-{{.}}</p>  
                     {{end}}   
                 </div>
                 <div style="width: max-content;">
-                    <h1 class="groupeName">Creation date :</h1>
+                    <div class="containerTitle">
+                        <span class="circle"></span>
+                        <h1 class="title">Creation date :</h1>                       
+                    </div>
                     <div style="margin-bottom: 1rem;" class="underline"></div>
                 </div>
                 <p class="text">{{.CreationDate}}</p> 
                 <div style="width: max-content;">
-                    <h1 class="groupeName">First album :</h1>
+                    <div class="containerTitle">
+                        <span class="circle"></span>
+                        <h1 class="title">First album :</h1>                       
+                    </div>   
                     <div style="margin-bottom: 1rem;" class="underline"></div>
-                </div>       
+                 </div>    
                 <p class="text">{{.FirstAlbum}}</p> 
             </div> 
         </div>                                     
