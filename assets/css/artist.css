@@ -1,35 +1,24 @@
-.cardContainer{
-    justify-content: center;
+.cardsContainer{
     display: flex;
     flex-direction: row;
-    font-family: monospace;
     flex-wrap: wrap;
+    justify-content: center;
+    font-family: monospace;
     gap: 1.5rem;
 }
 
-.groupeName{
-    width: max-content;
-    font-size: 1.2rem;
-}
-
-.imgStyle{
-    width: 20rem;
-    height: 15rem;
-    object-fit: cover;
-    overflow: hidden;
-}
-
 .card{
-    width: max-content;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    /* border: 2px solid #333; */
-    border-radius: 15px;
     display: flex;
     flex-direction: column;
+    width: max-content;
+    overflow: hidden;
+    border-radius: 15px;
     gap: 0;
     font-size: 1rem;
-    overflow: hidden;
     transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: rgba(236, 236, 236, 0.404);
+    cursor:pointer; 
 }
 
 .card:hover {
@@ -37,27 +26,63 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-.underline{
-    margin-top: -0.5rem;
-    height: 0.2rem;
-    background-color: #333;
-    border-radius: 999px;
+.imgStyle{
+    width: 20rem;
+    height: 15rem;
+    object-fit: cover;
+    overflow: hidden;
+    filter: grayscale(100%);
 }
 
-.content{
-    justify-content: center;
+.content{   
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 0;
     padding: 1rem;
 }
 
 .text{
+    margin: 0;
     text-indent: 2rem;
 }
 
 .members{
-    width:max-content;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    width:max-content;
     gap: 0rem;
-    /* height: 8rem; */
 }
+
+/*----------------------- Title Card -----------------------*/
+
+.containerTitle{
+    display: flex; 
+    flex-direction: row; 
+    gap: 1rem;
+}
+
+.circle{
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-top: 0.8rem;
+    border-radius: 999px;
+    background-color: #333;
+}
+
+.title{
+    width: max-content;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.underline{
+    height: 0.2rem;
+    margin-top: -0.5rem;
+    border-radius: 999px;
+    background-color: #333;
+}
+
+/*----------------------- Title Card -----------------------*/
