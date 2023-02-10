@@ -1,6 +1,8 @@
 package main
 
-import "groupietracker"
+import (
+	"groupietracker"
+)
 
 func main() {
 	groupietracker.StartServer()
