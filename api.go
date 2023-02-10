@@ -37,8 +37,8 @@ type Dates []struct {
 
 type Relation struct {
 	Index []struct {
-		ID             int         `json:"id"`
-		DatesLocations interface{} `json:"datesLocations"`
+		ID             int                    `json:"id"`
+		DatesLocations map[string]interface{} `json:"datesLocations"`
 	} `json:"index"`
 }
 
