@@ -58,7 +58,6 @@ func GetArtists() []byte {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Println(string(body))
 	return body
 }
 
@@ -99,7 +98,6 @@ func UnMarshallLocations(data []byte) Locations {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Println(tab)
 	return tab
 }
 
