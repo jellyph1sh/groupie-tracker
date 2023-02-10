@@ -16,7 +16,7 @@ func homeEvent(homePage *template.Template) {
 func concertsEvent(concertsPage *template.Template) {
 	var relation = UnMarshallRelation(GetRelation())
 	http.HandleFunc("/concerts", func(w http.ResponseWriter, r *http.Request) {
-		concertsPage.Execute(w, relation)
+		concertsPage.Execute(w, relation.Index)
 	})
 }
 
