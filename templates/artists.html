@@ -5,18 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets\css\artist.css">
+    <script src="../scripts/button.js"></script>
     <title>Artist</title>
 </head>
 <body>
     <h1>Artist</h1>
     <div class="cardsContainer">{{range .}}
         <div class="card">
-            <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
-            <div class="groupeName" >
-                <h1 class="title">{{.Name}}</h1>
+            <div >
+                <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
+                <div class="groupeName">
+                    <h1 class="title">{{.Name}}</h1>
+                </div>
             </div>
             <div class="content">
-           
                 <div style="width: max-content;">
                     <div class="containerTitle">
                         <span class="circle"></span>
@@ -36,7 +38,7 @@
                     </div>
                     <div style="margin-bottom: 1rem;" class="underline"></div>
                 </div>
-                <p class="text">{{.CreationDate}}</p> 
+                <p class="text">The group was created in {{.CreationDate}}</p> 
                 <div style="width: max-content;">
                     <div class="containerTitle">
                         <span class="circle"></span>
@@ -44,7 +46,7 @@
                     </div>   
                     <div style="margin-bottom: 1rem;" class="underline"></div>
                  </div>    
-                <p class="text">{{.FirstAlbum}}</p> 
+                <p class="text">Their first album was released the {{.FirstAlbum}}</p> 
             </div> 
         </div>                                     
     {{end}}</div>
