@@ -9,8 +9,9 @@
 <body>
     {{ range . }}
         <div>
-            {{ range .DatesLocations }}
-                {{ . }}
+            {{ range $key, $value := .DatesLocations }}
+                {{ $key }} <br>
+                {{ $value }} <br>
             {{ end }}
         </div>
     {{ end }}
