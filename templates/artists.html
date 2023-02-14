@@ -5,11 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets\css\artist.css">
-    <script src="../scripts/button.js"></script>
+    <link rel="stylesheet" href="assets\css\style.css">
     <title>Artist</title>
 </head>
 <body>
-    <h1>Artist</h1>
+    <nav >
+        <label for="toggle">☰</label>
+        <input type="checkbox" id="toggle">
+        <div class="linkPages">
+            <a href="#" >Concerts</a>
+            <a href="#" >Home</a>
+            <a href="#" >Artists</a>
+        </div>
+    </nav>
     <div class="cardsContainer">{{range .}}
         <div class="card">
             <div >
@@ -50,5 +58,10 @@
             </div> 
         </div>                                     
     {{end}}</div>
+    <footer class="containerFooter">
+        <p class="contentFooter"> This is made for groupie tracker </p>
+        <p class="contentFooter">Legal Mention : nope</p>
+        <p class="contentFooter">CGU : nope</p>
+    </footer>  
 </body>
 </html>
