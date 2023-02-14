@@ -1,23 +1,6 @@
-.page{
-  margin-left: -0.5rem;
-  /* padding-right: 1rem; */
-  background-color: rgb(37, 37, 37);
-  /* width: 100%; */
-  height: flex;
-  display: flex;
-  justify-content: center;
- 
+body{
+  margin: 0;
 }
-
-
-.menu-list{
-  display: flex;
-  flex-direction: row;
-  gap: 9rem;
-  list-style: none;
-}
-
-
 
 a{
   text-decoration: none;
@@ -28,35 +11,97 @@ a{
 }
 
 a:hover {
-  color: gold;
+  color: white;
 }
 
+/*---------------------- Footer ----------------------*/
 footer {
   display: flex;
   justify-content: center;
   padding: 5px;
   background-color: rgb(37, 37, 37);
   color: #8b8888;
-  margin-top: -0rem;
-  margin-left: -0rem;
-  /* margin-right:-0.2rem ; */
-  margin-top: 3.4rem;
-  padding-right: 0rem;  
+  margin-top: 3.45rem;
 }
 
-.foot{
+.contentFooter{
   display: block;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: auto;
 }
 
-.foote{
-
+.containerFooter{
+  text-align: center;
   justify-content: space-between;
   padding-bottom: auto;
 }
 
-body{
-  margin: 0;
+/*---------------------- Footer ----------------------*/
+
+/*---------------------- Header & Responsive ----------------------*/
+
+.linkPages{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
+
+nav{
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  padding: 1rem 0rem;
+}
+
+label, #toggle
+{
+    display: none;
+}
+@media all and (min-width: 991px){ 
+  nav{
+    background-color: rgb(37, 37, 37)
+  }
+}
+@media all and (max-width: 991px){
+  nav {
+    padding: 0;
+  }
+ 
+  nav .linkPages {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+
+    height: 220px;
+    background-color: rgba(107, 107, 107, 0.964);
+  }
+ 
+  nav .linkPages a {
+    width: 50%;
+  }
+ 
+  label {
+    display: flex;
+    align-self: flex-start;
+    padding-left: 1rem;
+    padding-bottom: 0.4rem;
+    cursor: pointer;
+    font-size: 2.4rem;
+    color: aqua;
+    background-color: rgb(37, 37, 37);
+  }
+
+  a{
+    text-align: center;
+    font-family: monospace;
+    font-weight: bold;
+    color: aqua;
+  }
+
+  #toggle:checked + .linkPages {
+     display: flex;
+  }
+}
+
+/*---------------------- Header & Responsive ----------------------*/
