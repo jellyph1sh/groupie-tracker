@@ -9,36 +9,42 @@ import (
 )
 
 type Artists []struct {
-	Id           int
-	Image        string
-	Name         string
-	Members      []string
-	CreationDate int
-	FirstAlbum   string
-	Locations    string
-	ConcertDates string
-	Relations    string
+	Id           int      `json:"id"`
+	Image        string   `json:"image"`
+	Name         string   `json:"name"`
+	Members      []string `json:"members"`
+	CreationDate int      `json:"creationDate"`
+	FirstAlbum   string   `json:"firstAlbum"`
+	Locations    string   `json:"locations"`
+	ConcertDates string   `json:"concertDates"`
+	Relations    string   `json:"relations"`
 }
 
-type Locations []struct {
-	ID        int
-	Locations []string
-	Dates     string
+type Locations struct {
+	Index []struct {
+		ID        int      `json:"id"`
+		Locations []string `json:"locations"`
+		Dates     string   `json:"dates"`
+	}
 }
 
 type Dates []struct {
-	ID    int
-	Dates []string
+	Index []struct {
+		ID    int      `json:"id"`
+		Dates []string `json:"dates"`
+	}
 }
 
-type Relation []struct {
-	ID             int
-	DatesLocations map[string][]string // prend comme clé la ville puis comme valeur un tableau de dates
+type Relation struct {
+	Index []struct {
+		ID             int                    `json:"id"`
+		DatesLocations map[string]interface{} `json:"datesLocations"`
+	} `json:"index"`
 }
 
 /*---------------------- Artist API ----------------------*/
 
-func GetArtist() []byte {
+func GetArtists() []byte {
 	url := "https://groupietrackers.herokuapp.com/api/artists"
 	req, _ := http.NewRequest("GET", url, nil)
 	res, err := http.DefaultClient.Do(req)
@@ -52,7 +58,6 @@ func GetArtist() []byte {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	// fmt.Println(string(body))
 	return body
 }
 
@@ -70,7 +75,7 @@ func UnMarshallArtists(data []byte) Artists {
 
 /*---------------------- Location API ----------------------*/
 
-func GetLocation() []byte {
+func GetLocations() []byte {
 	url := "https://groupietrackers.herokuapp.com/api/locations"
 	req, _ := http.NewRequest("GET", url, nil)
 	res, err := http.DefaultClient.Do(req)
@@ -83,7 +88,7 @@ func GetLocation() []byte {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	return body[9 : len(body)-2]
+	return body
 }
 
 func UnMarshallLocations(data []byte) Locations {
@@ -93,7 +98,6 @@ func UnMarshallLocations(data []byte) Locations {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Println(tab)
 	return tab
 }
 
@@ -105,17 +109,17 @@ func GetRelation() []byte {
 	url := "https://groupietrackers.herokuapp.com/api/relation"
 	req, _ := http.NewRequest("GET", url, nil)
 	res, err := http.DefaultClient.Do(req)
-	defer res.Body.Close()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	return body[9 : len(body)-2]
+	return body
 }
 
 func UnMarshallRelation(data []byte) Relation {
@@ -125,7 +129,6 @@ func UnMarshallRelation(data []byte) Relation {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Println(tab)
 	return tab
 }
 
@@ -133,32 +136,31 @@ func UnMarshallRelation(data []byte) Relation {
 
 /*---------------------- Dates API ----------------------*/
 
-func GetDate() []byte {
+func GetDates() []byte {
 	url := "https://groupietrackers.herokuapp.com/api/dates"
 	req, _ := http.NewRequest("GET", url, nil)
 	res, err := http.DefaultClient.Do(req)
-	defer res.Body.Close()
 	if err != nil {
 		
 		fmt.Println(err)
 		os.Exit(1)
 	}
+	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	return body[9 : len(body)-2]
+	return body
 }
 
-func UnMarshallDate(data []byte) Dates {
+func UnMarshallDates(data []byte) Dates {
 	var tab Dates
 	err := json.Unmarshal(data, &tab)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Println(tab)
 	return tab
 }
 
