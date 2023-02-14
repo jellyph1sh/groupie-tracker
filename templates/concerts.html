@@ -7,13 +7,24 @@
     <title>Concerts</title>
 </head>
 <body>
-    {{ range . }}
-        <div>
-            {{ range $key, $value := .DatesLocations }}
-                {{ $key }} <br>
-                {{ $value }} <br>
+    {{ $base := . }}
+    {{ range $index := $base.Relation.Index }}
+        {{ range $artist := $base.Artists }}
+            {{ if eq $index.ID $artist.Id }}
+                <div>
+                    <h3>Name : {{ $artist.Name }}</p>
+                    {{ range $place, $dates := $index.DatesLocations }}
+                        <h4>Place : {{ $place }}</h4>
+                        <h4>Dates :</h4>
+                        {{ range $date := $dates }}
+                            <p>{{ $date }}</p>
+                        {{ end }}
+                    {{ end }}
+                </div>
+                <br>
+                <br>
             {{ end }}
-        </div>
+        {{ end }}
     {{ end }}
 </body>
 </html>

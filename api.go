@@ -42,6 +42,11 @@ type Relation struct {
 	} `json:"index"`
 }
 
+type Concerts struct {
+	Artists  Artists
+	Relation Relation
+}
+
 /*---------------------- Artist API ----------------------*/
 
 func GetArtists() []byte {
@@ -190,3 +195,11 @@ func UnMarshallDates(data []byte) Dates {
 }
 
 /*---------------------- Dates API ----------------------*/
+
+func GetConcerts() *Concerts {
+	relation := UnMarshallRelation(GetRelation())
+	SetDisplayDate(&relation)
+	artists := UnMarshallArtists(GetArtists())
+	concerts := Concerts{Artists: artists, Relation: relation}
+	return &concerts
+}
