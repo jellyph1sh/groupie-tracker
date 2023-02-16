@@ -4,11 +4,26 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
 	"os"
+	"strconv"
+	"time"
 )
 
 type Artists []struct {
+	Id           int      `json:"id"`
+	Image        string   `json:"image"`
+	Name         string   `json:"name"`
+	Members      []string `json:"members"`
+	CreationDate int      `json:"creationDate"`
+	FirstAlbum   string   `json:"firstAlbum"`
+	Locations    string   `json:"locations"`
+	ConcertDates string   `json:"concertDates"`
+	Relations    string   `json:"relations"`
+}
+
+type Artist struct {
 	Id           int      `json:"id"`
 	Image        string   `json:"image"`
 	Name         string   `json:"name"`
@@ -74,6 +89,34 @@ func UnMarshallArtists(data []byte) Artists {
 		os.Exit(1)
 	}
 	return tab
+}
+
+func GetTopFive() []Artist {
+	tab := RandNumber()
+	var temp Artist
+	var result []Artist
+	for numb := 0; numb < len(tab); numb++ {
+		url := "https://groupietrackers.herokuapp.com/api/artists/"
+		url += strconv.Itoa(tab[numb])
+		req, _ := http.NewRequest("GET", url, nil)
+		res, _ := http.DefaultClient.Do(req)
+		defer res.Body.Close()
+		body, _ := ioutil.ReadAll(res.Body)
+		json.Unmarshal([]byte(body), &temp)
+		result = append(result, temp)
+	}
+	return result
+}
+
+func RandNumber() []int {
+	var tabRandNumb []int
+	for i := 1; i < 6; i++ {
+		rand.Seed(time.Now().UnixNano())
+		time.Sleep(1)
+		x := rand.Intn(50)
+		tabRandNumb = append(tabRandNumb, x)
+	}
+	return tabRandNumb
 }
 
 /*---------------------- Artist API ----------------------*/
@@ -172,7 +215,7 @@ func GetDates() []byte {
 	req, _ := http.NewRequest("GET", url, nil)
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
-		
+
 		fmt.Println(err)
 		os.Exit(1)
 	}

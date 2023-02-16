@@ -1,0 +1,10 @@
+.containerHome{
+    display: flex;
+    flex-direction:column;
+    padding-Top : 5rem;
+}
+
+.topFiveContainer{
+    display: flex;
+    flex-direction: row;
+}
