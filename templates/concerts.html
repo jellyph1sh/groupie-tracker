@@ -4,27 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/concert.css">
     <title>Concerts</title>
 </head>
 <body>
-    {{ $base := . }}
-    {{ range $index := $base.Relation.Index }}
-        {{ range $artist := $base.Artists }}
-            {{ if eq $index.ID $artist.Id }}
-                <div>
-                    <h3>Name : {{ $artist.Name }}</p>
-                    {{ range $place, $dates := $index.DatesLocations }}
-                        <h4>Place : {{ $place }}</h4>
-                        <h4>Dates :</h4>
-                        {{ range $date := $dates }}
-                            <p>{{ $date }}</p>
-                        {{ end }}
-                    {{ end }}
-                </div>
-                <br>
-                <br>
+    <div class="globalCardContainer">
+        {{ $base := . }}
+        {{ range $index := $base.Relation.Index }}
+            {{ range $artist := $base.Artists }}
+                {{ if eq $index.ID $artist.Id }}
+                    <div class="cardConcert">
+                        <h3 class="titleGroup">{{ $artist.Name }}</h3>
+                       
+                            {{ range $place, $dates := $index.DatesLocations }}
+                            <div class="cardLocation">
+                                <h4 class="textLocation">{{ $place }}</h4>
+                                <div class="containerDate">
+                                {{ range $date := $dates }}
+                               
+                                    <p class="textLocation">{{ $date }}</p>
+                                {{ end }}
+                                </div>
+                            </div>
+                            {{ end }}
+                            
+                    </div>
+                  
+                    <br>
+                    <br>
+                {{ end }}
             {{ end }}
         {{ end }}
-    {{ end }}
+    </div>
 </body>
 </html>

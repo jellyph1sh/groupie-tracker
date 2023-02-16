@@ -1,14 +1,77 @@
-.navbar{
+.containerCarou{
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  margin-top: 0px;
-  background-color: teal;
-  border-radius: 7px;
-  width: flex;
+  height: 100vh;
+  background-color: gray;
 }
 
-.navi{
-  text-decoration:none;
+.images{
+  display: flex;
+  animation-duration: 10s;
+  animation-name: mesImages;
+}
+
+#carrousel{
+  width: 640px;
+  overflow: auto;
+}
+
+/* @keyframes mesImages{
+  0%{
+    transform: translateX(0);
+  }
+  25%{
+    transform: translateX(-640px);
+  }
+  50%{
+    transform: translateX(-1240px);
+  }
+  75%{
+    transform: translateX(-1920px);
+  }
+  100%{
+    transform: translateX(0);
+  }
+} */
+
+.cardConcert{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: #B2ADAD;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.globalCardContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.titleGroup{
+  font-size: 2rem;
+  color: #3D3636;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.cardLocation{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  background-color: #3D3636 ;
+  border-radius: 15px;
+}
+
+.textLocation{
+  font-family: monospace;
+  color: white;
+}
+
+.containerDate{
+  display: flex;
+  flex-direction: column;
 }
