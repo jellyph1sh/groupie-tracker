@@ -5,41 +5,32 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <link rel="stylesheet" href="../assets/css/home.css">
   <link rel="stylesheet" href="../assets/css/style.css">
 
   <title class="tittle">Groupie-Tracker🎶</title>
 </head>
 <body>
-    <nav class="page">
-      <ul class="menu-list">
-        <li class="bmenu"><a href="#0" class="menu">Concerts</a></li>
-        <li class="bmenu"><a href="#0" class="menu">Home</a></li>
-        <li class="bmenu"><a href="#0" class="menur">Artists</a></li>
-      </ul>
-    </nav>
-    
-    <div class="row1-container">
-      <div class="box box-down cyan">
-        <h2>What it is?</h2>
-        <p>This website you can find some information on your favourites artists and there concerts all around you.  💿🌍 </p>
-        <img src="https://assets.codepen.io/2301174/icon-supervisor.svg" alt="">
-      </div>
-  
-          <div class="box box-down blue">
-            <h2>How does it work?</h2>
-            <p>Uses data from a secure database and managen it with an API link to this website <br> 💻</p>
-            <img src="https://assets.codepen.io/2301174/icon-calculator.svg" alt="">
-        </div>  
-
-<!-- <footer class="foote">
-  <p class="foot"> This is made for groupie tracker </p>
-  <p class="foot">Legal Mention : nope</p>
-  <p class="foot">CGU : nope</p>
-  
-  
-</footer>  
-   -->
-
+  <nav>
+    <label for="toggle">☰</label>
+    <input type="checkbox" id="toggle">
+    <div class="linkPages">
+        <a href="#" >Concerts</a>
+        <a href="#" >Home</a>
+        <a href="#" >Artists</a>
+    </div>
+  </nav>
+  <div class="containerHome">{{range .}}
+    <div class="topFiveContainer">
+      <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
+      <p>{{.Name}}</p>
+    </div>
+    {{end}} 
+  </div>
+  <footer class="containerFooter">
+    <p class="contentFooter">This is made for groupie tracker</p>
+    <p class="contentFooter">Legal Mention : nope</p>
+    <p class="contentFooter">CGU : nope</p>
+  </footer> 
 </body>
 </html>
