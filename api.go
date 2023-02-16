@@ -57,6 +57,11 @@ type Relation struct {
 	} `json:"index"`
 }
 
+type Concerts struct {
+	Artists  Artists
+	Relation Relation
+}
+
 /*---------------------- Artist API ----------------------*/
 
 func GetArtists() []byte {
@@ -175,6 +180,32 @@ func UnMarshallRelation(data []byte) Relation {
 	return tab
 }
 
+func SetDisplayDate(relation *Relation) Relation {
+	for i := 0; i < len(relation.Index); i++ {
+		for place := range relation.Index[i].DatesLocations {
+			var newPlace = ""
+			for li := 0; li < len(place); li++ {
+				if li == 0 {
+					if rune(place[li]) < 97 {
+						newPlace += string(place[li])
+					} else {
+						newPlace += string(byte(rune(place[li]) - 32))
+					}
+				} else if place[li] == byte('-') || place[li] == byte('_') {
+					newPlace += " "
+				} else if place[li-1] == byte('-') || place[li-1] == byte('_') {
+					newPlace += string(byte(rune(place[li]) - 32))
+				} else {
+					newPlace += string(place[li])
+				}
+			}
+			relation.Index[i].DatesLocations[newPlace] = relation.Index[i].DatesLocations[place]
+			delete(relation.Index[i].DatesLocations, place)
+		}
+	}
+	return *relation
+}
+
 /*---------------------- Relation API ----------------------*/
 
 /*---------------------- Dates API ----------------------*/
@@ -208,3 +239,11 @@ func UnMarshallDates(data []byte) Dates {
 }
 
 /*---------------------- Dates API ----------------------*/
+
+func GetConcerts() *Concerts {
+	relation := UnMarshallRelation(GetRelation())
+	SetDisplayDate(&relation)
+	artists := UnMarshallArtists(GetArtists())
+	concerts := Concerts{Artists: artists, Relation: relation}
+	return &concerts
+}

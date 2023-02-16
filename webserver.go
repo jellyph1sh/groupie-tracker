@@ -14,6 +14,13 @@ func homeEvent(homePage *template.Template) {
 	})
 }
 
+func concertsEvent(concertsPage *template.Template) {
+	var concerts = GetConcerts()
+	http.HandleFunc("/concerts", func(w http.ResponseWriter, r *http.Request) {
+		concertsPage.Execute(w, concerts)
+	})
+}
+
 func artistsEvent(artistsPage *template.Template) {
 	artists := UnMarshallArtists(GetArtists())
 	http.HandleFunc("/artists", func(w http.ResponseWriter, r *http.Request) {
@@ -21,19 +28,21 @@ func artistsEvent(artistsPage *template.Template) {
 	})
 }
 
-func loadTemplates(path string) (*template.Template, *template.Template) {
+func loadTemplates(path string) (*template.Template, *template.Template, *template.Template) {
 	var home = template.Must(template.ParseFiles(path + "index.html"))
-	var artists = template.Must(template.ParseFiles(path + "artists.html"))
-	return home, artists
+  var artists = template.Must(template.ParseFiles(path + "artists.html"))
+	var concerts = template.Must(template.ParseFiles(path + "concerts.html"))
+	return home, artists, concerts
 }
 
 func StartServer() {
 	GetTopFive()
-	var homePage, artistsPage = loadTemplates("./templates/")
+	var homePage, artistsPage, concertsPage = loadTemplates("./templates/")
 	homeEvent(homePage)
-	artistsEvent(artistsPage)
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
-	fmt.Println("URL: http://localhost:8080/")
+  artistsEvent(artistsPage)
+	concertsEvent(concertsPage)
+  http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
+  fmt.Println("URL: http://localhost:8080/")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
