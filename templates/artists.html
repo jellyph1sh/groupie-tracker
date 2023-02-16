@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets\css\artist.css">
+    <link rel="stylesheet" href="assets\css\style.css">
+    <title>Artist</title>
+</head>
+<body>
+    <nav >
+        <label for="toggle">☰</label>
+        <input type="checkbox" id="toggle">
+        <div class="linkPages">
+            <a href="#" >Concerts</a>
+            <a href="#" >Home</a>
+            <a href="#" >Artists</a>
+        </div>
+    </nav>
+    <div class="cardsContainer">{{range .}}
+        <div class="card">
+            <div >
+                <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
+                <div class="groupeName">
+                    <h1 class="title">{{.Name}}</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div style="width: max-content;">
+                    <div class="containerTitle">
+                        <span class="circle"></span>
+                        <h2 class="title">Members :</h1>                       
+                    </div>
+                    <div style="margin-bottom: 1rem;" class="underline"></div>
+                </div>
+                <div class="members">
+                    {{range .Members}}
+                        <p  style="margin: 0; text-indent: 2rem;">-{{.}}</p>  
+                    {{end}}   
+                </div>
+                <div style="width: max-content;">
+                    <div class="containerTitle">
+                        <span class="circle"></span>
+                        <h2 class="title">Creation date :</h1>                       
+                    </div>
+                    <div style="margin-bottom: 1rem;" class="underline"></div>
+                </div>
+                <p class="text">The group was created in {{.CreationDate}}</p> 
+                <div style="width: max-content;">
+                    <div class="containerTitle">
+                        <span class="circle"></span>
+                        <h2 class="title">First album :</h1>                       
+                    </div>   
+                    <div style="margin-bottom: 1rem;" class="underline"></div>
+                 </div>    
+                <p class="text">Their first album was released the {{.FirstAlbum}}</p> 
+            </div> 
+        </div>                                     
+    {{end}}</div>
+    <footer class="containerFooter">
+        <p class="contentFooter"> This is made for groupie tracker </p>
+        <p class="contentFooter">Legal Mention : nope</p>
+        <p class="contentFooter">CGU : nope</p>
+    </footer>  
+</body>
+</html>

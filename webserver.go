@@ -20,18 +20,27 @@ func concertsEvent(concertsPage *template.Template) {
 	})
 }
 
-func loadTemplates(path string) (*template.Template, *template.Template) {
+func artistsEvent(artistsPage *template.Template) {
+	artists := UnMarshallArtists(GetArtist())
+	http.HandleFunc("/artists", func(w http.ResponseWriter, r *http.Request) {
+		artistsPage.Execute(w, artists)
+	})
+}
+
+func loadTemplates(path string) (*template.Template, *template.Template, *template.Template) {
 	var home = template.Must(template.ParseFiles(path + "index.html"))
+  var artists = template.Must(template.ParseFiles(path + "artists.html"))
 	var concerts = template.Must(template.ParseFiles(path + "concerts.html"))
-	return home, concerts
+	return home, artists, concerts
 }
 
 func StartServer() {
-	var homePage, concertsPage = loadTemplates("./templates/")
+	var homePage, artistsPage, concertsPage = loadTemplates("./templates/")
 	homeEvent(homePage)
+  artistsEvent(artistsPage)
 	concertsEvent(concertsPage)
-
-	fmt.Println("URL: http://localhost:8080/")
+  http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
+  fmt.Println("URL: http://localhost:8080/")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}

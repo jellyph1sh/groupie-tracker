@@ -172,6 +172,7 @@ func GetDates() []byte {
 	req, _ := http.NewRequest("GET", url, nil)
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
+		
 		fmt.Println(err)
 		os.Exit(1)
 	}
