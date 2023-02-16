@@ -8,13 +8,14 @@ import (
 )
 
 func homeEvent(homePage *template.Template) {
+	topFive := GetTopFive()
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		homePage.Execute(w, nil)
+		homePage.Execute(w, topFive)
 	})
 }
 
 func artistsEvent(artistsPage *template.Template) {
-	artists := UnMarshallArtists(GetArtist())
+	artists := UnMarshallArtists(GetArtists())
 	http.HandleFunc("/artists", func(w http.ResponseWriter, r *http.Request) {
 		artistsPage.Execute(w, artists)
 	})
@@ -27,6 +28,7 @@ func loadTemplates(path string) (*template.Template, *template.Template) {
 }
 
 func StartServer() {
+	GetTopFive()
 	var homePage, artistsPage = loadTemplates("./templates/")
 	homeEvent(homePage)
 	artistsEvent(artistsPage)
