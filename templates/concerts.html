@@ -12,7 +12,7 @@
         {{ range $artist := $base.Artists }}
             {{ if eq $index.ID $artist.Id }}
                 <div>
-                    <h3>Name : {{ $artist.Name }}</p>
+                    <h3>Name : {{ $artist.Name }}</h3>
                     {{ range $place, $dates := $index.DatesLocations }}
                         <h4>Place : {{ $place }}</h4>
                         <h4>Dates :</h4>
