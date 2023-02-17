@@ -62,6 +62,18 @@ type Concerts struct {
 	Relation Relation
 }
 
+func GetApi(name string) any {
+	switch name {
+	case "topfive":
+		return GetTopFive()
+	case "artists":
+		return UnMarshallArtists(GetArtists())
+	case "concerts":
+		return GetConcerts()
+	}
+	return nil
+}
+
 /*---------------------- Artist API ----------------------*/
 
 func GetArtists() []byte {
@@ -110,7 +122,7 @@ func GetTopFive() []Artist {
 
 func RandNumber() []int {
 	var tabRandNumb []int
-	for i := 1; i < 6; i++ {
+	for i := 0; i <= 4; i++ {
 		rand.Seed(time.Now().UnixNano())
 		time.Sleep(1)
 		x := rand.Intn(50)
