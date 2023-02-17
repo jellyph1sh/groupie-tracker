@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/concert.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Concerts</title>
 </head>
 <body>
@@ -13,23 +14,29 @@
         {{ range $index := $base.Relation.Index }}
             {{ range $artist := $base.Artists }}
                 {{ if eq $index.ID $artist.Id }}
-                    <div class="cardConcert">
+                    <div class="containerCards">
                         <h3 class="titleGroup">{{ $artist.Name }}</h3>
-                       
-                            {{ range $place, $dates := $index.DatesLocations }}
-                            <div class="cardLocation">
-                                <h4 class="textLocation">{{ $place }}</h4>
-                                <div class="containerDate">
-                                {{ range $date := $dates }}
-                               
-                                    <p class="textLocation">{{ $date }}</p>
-                                {{ end }}
+                        <div class="cardConcert " id="carrousel">
+                        {{ range $place, $dates := $index.DatesLocations }}
+                            <div class="cardLocation images ">
+                                <img class="imageLoc" src="https://picsum.photos/id/237/200/300" alt="maps Image">
+                                <div class="containerContentLoc">
+                                    <div class="containerTitle">
+                                        <span class="material-symbols-outlined loc">location_on</span>
+                                        <h4 class="textLocation">{{ $place }}</h4>
+                                    </div>
+                                    <span class="underline"></span>
+                                    <div class="containerDate">
+                                    {{ range $date := $dates }}
+                                        <p class=" textIndent">{{ $date }}</p>
+                                    {{ end }}
+                                    </div>
                                 </div>
                             </div>
                             {{ end }}
                             
+                        </div>
                     </div>
-                  
                     <br>
                     <br>
                 {{ end }}
