@@ -30,19 +30,18 @@ func artistsEvent(artistsPage *template.Template) {
 
 func loadTemplates(path string) (*template.Template, *template.Template, *template.Template) {
 	var home = template.Must(template.ParseFiles(path + "index.html"))
-  var artists = template.Must(template.ParseFiles(path + "artists.html"))
+	var artists = template.Must(template.ParseFiles(path + "artists.html"))
 	var concerts = template.Must(template.ParseFiles(path + "concerts.html"))
 	return home, artists, concerts
 }
 
 func StartServer() {
-	GetTopFive()
 	var homePage, artistsPage, concertsPage = loadTemplates("./templates/")
 	homeEvent(homePage)
-  artistsEvent(artistsPage)
+	artistsEvent(artistsPage)
 	concertsEvent(concertsPage)
-  http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
-  fmt.Println("URL: http://localhost:8080/")
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
+	fmt.Println("URL: http://localhost:8080/")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
