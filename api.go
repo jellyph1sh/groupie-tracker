@@ -259,3 +259,18 @@ func GetConcerts() *Concerts {
 	concerts := Concerts{Artists: artists, Relation: relation}
 	return &concerts
 }
+
+/*---------------------- Sort ----------------------*/
+
+func AlphabeticalSort(List Artists) Artists {
+	for n := 1; n < len(List); n++ {
+		if List[n].Name < List[n-1].Name {
+			List[n-1], List[n] = List[n], List[n-1]
+			return AlphabeticalSort(List)
+		}
+	}
+	for i := 0; i < len(List); i++ {
+		fmt.Println(List[i].Name)
+	}
+	return List
+}
