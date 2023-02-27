@@ -22,6 +22,10 @@ func loadPage(mux *http.ServeMux, page *Page) {
 	mux.HandleFunc(page.url, func(w http.ResponseWriter, r *http.Request) {
 		data := GetApi(page.API)
 		template.Execute(w, data)
+		r.ParseForm()
+		if len(r.Form) != 0 {
+			fmt.Println(r.Form["username"])
+		}
 	})
 }
 
