@@ -21,11 +21,11 @@ func loadPage(mux *http.ServeMux, page *Page) {
 	template := loadTemplate(page.fileName)
 	mux.HandleFunc(page.url, func(w http.ResponseWriter, r *http.Request) {
 		data := GetApi(page.API)
-		template.Execute(w, data)
 		r.ParseForm()
 		if len(r.Form) != 0 {
-			fmt.Println(r.Form["username"])
+			data = GetSort(r.FormValue("sort"))
 		}
+		template.Execute(w, data)
 	})
 }
 

@@ -9,7 +9,7 @@
     <title>Artist</title>
 </head>
 <body>
-    <nav >
+    <nav>
         <label for="toggle">☰</label>
         <input type="checkbox" id="toggle">
         <div class="linkPages">
@@ -17,7 +17,11 @@
             <a href="#" >Home</a>
             <a href="#" >Artists</a>
         </div>
-    </nav>
+      </nav>
+    <form class="sortStyle" method="get" action="">
+        <button class="buttonSort" type="submit" name="sort" value="alpha">Alphabetical sort</button>
+        <button class="buttonSort" type="submit" name="sort" value="date">Date sort</button>
+    </form>
     <div class="cardsContainer">{{range .}}
         <div class="card">
             <div >

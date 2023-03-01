@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(223, 223, 223);
+    background-color: rgb(71, 71, 71);
 }
 
 @keyframes onCard {
@@ -45,7 +45,7 @@ body{
     gap: 0;
     border-radius: 15px;
     font-size: 1rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.244);
     background-color: white;
     cursor:pointer; 
 }
@@ -137,4 +137,27 @@ body{
     border-radius: 15px;
     padding: 0.2rem 1rem;
     border: thick double #969696;
+}
+
+.sortStyle{
+    padding-top: 5rem;
+    margin-left: 4rem;
+    margin-bottom: -3rem;
+}
+
+.buttonSort{
+    padding: 0.8rem 0.5rem;
+    background-color: rgb(37, 37, 37);
+    color: cyan;
+    font-weight: 600;
+    font-family: monospace;
+    border-radius: 20px;
+    min-width: 10rem;
+    border: #333 2px solid;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.148)
+}
+
+.buttonSort:hover{
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.334);
+    cursor: pointer;    
 }
