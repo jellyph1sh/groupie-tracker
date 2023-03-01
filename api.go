@@ -269,8 +269,51 @@ func AlphabeticalSort(List Artists) Artists {
 			return AlphabeticalSort(List)
 		}
 	}
-	for i := 0; i < len(List); i++ {
-		fmt.Println(List[i].Name)
+	return List
+}
+
+func CreationDateSort(List Artists) Artists {
+	for n := 1; n < len(List); n++ {
+		if List[n].CreationDate < List[n-1].CreationDate {
+			List[n-1], List[n] = List[n], List[n-1]
+			return CreationDateSort(List)
+		}
 	}
 	return List
 }
+
+func GetSort(name string) any {
+	switch name {
+	case "date":
+		return CreationDateSort(UnMarshallArtists(GetArtists()))
+	case "alpha":
+		return AlphabeticalSort(UnMarshallArtists(GetArtists()))
+	}
+	return nil
+}
+
+// func fastSort(list Artists, first int, last int) Artists {
+// 	var pivot int
+// 	var j int
+// 	var i int
+// 	if first < last {
+// 		pivot = first
+// 		i = first
+// 		j = last
+// 		for i < j {
+// 			for list[i].Name <= list[pivot].Name && i < last {
+// 				i++
+// 			}
+// 			for list[j].Name > list[pivot].Name {
+// 				j--
+// 			}
+// 			if i < j {
+// 				list[i], list[j] = list[j], list[i]
+// 			}
+// 		}
+// 		list[pivot], list[j] = list[j], list[pivot]
+// 		fastSort(list, first, j-1)
+// 		fastSort(list, j+1, last)
+// 	}
+// 	return list
+// }
