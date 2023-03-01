@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets\css\artist.css">
     <link rel="stylesheet" href="assets\css\style.css">
+    <script src="../scripts/onclick.js"></script>
     <title>Artist</title>
 </head>
 <body>
@@ -13,24 +14,24 @@
         <label for="toggle">☰</label>
         <input type="checkbox" id="toggle">
         <div class="linkPages">
-            <a href="#" >Concerts</a>
-            <a href="#" >Home</a>
-            <a href="#" >Artists</a>
+            <a href="/concerts" >Concerts</a>
+            <a href="/" >Home</a>
+            <a href="/artists" >Artists</a>
         </div>
       </nav>
     <form class="sortStyle" method="get" action="">
-        <button class="buttonSort" type="submit" name="sort" value="alpha">Alphabetical sort</button>
-        <button class="buttonSort" type="submit" name="sort" value="date">Date sort</button>
+        <button class="buttonSort" type="submit" name="sort" value="alpha">Alphabetical sorting</button>
+        <button class="buttonSort" type="submit" name="sort" value="date">Date sorting</button>
     </form>
     <div class="cardsContainer">{{range .}}
-        <div class="card">
-            <div >
+        <div style="display:flex" class="card">
+            <div onclick="seeMore(this)">
                 <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
                 <div class="groupeName">
                     <h1 class="title">{{.Name}}</h1>
                 </div>
             </div>
-            <div class="content">
+            <div class="content" id="hiddenContent">
                 <div style="width: max-content;">
                     <div class="containerTitle">
                         <span class="circle"></span>
@@ -40,7 +41,7 @@
                 </div>
                 <div class="members">
                     {{range .Members}}
-                        <p  style="margin: 0; text-indent: 2rem;">-{{.}}</p>  
+                        <p  style="margin: 0; text-indent: 2rem; color: white;">-{{.}}</p>  
                     {{end}}   
                 </div>
                 <div style="width: max-content;">
