@@ -2,47 +2,44 @@ package groupietracker
 
 import (
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
+	"text/template"
 )
 
-func homeEvent(homePage *template.Template) {
-	topFive := GetTopFive()
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		homePage.Execute(w, topFive)
+type Page struct {
+	url      string
+	fileName string
+	API      string
+}
+
+func loadTemplate(pageName string) *template.Template {
+	return template.Must(template.ParseFiles("./templates/" + pageName + ".html"))
+}
+
+func loadPage(mux *http.ServeMux, page *Page) {
+	template := loadTemplate(page.fileName)
+	mux.HandleFunc(page.url, func(w http.ResponseWriter, r *http.Request) {
+		data := GetApi(page.API)
+		r.ParseForm()
+		if len(r.Form) != 0 {
+			data = GetSort(r.FormValue("sort"))
+		}
+		template.Execute(w, data)
 	})
 }
 
-func concertsEvent(concertsPage *template.Template) {
-	var concerts = GetConcerts()
-	http.HandleFunc("/concerts", func(w http.ResponseWriter, r *http.Request) {
-		concertsPage.Execute(w, concerts)
-	})
-}
-
-func artistsEvent(artistsPage *template.Template) {
-	artists := UnMarshallArtists(GetArtists())
-	http.HandleFunc("/artists", func(w http.ResponseWriter, r *http.Request) {
-		artistsPage.Execute(w, artists)
-	})
-}
-
-func loadTemplates(path string) (*template.Template, *template.Template, *template.Template) {
-	var home = template.Must(template.ParseFiles(path + "index.html"))
-	var artists = template.Must(template.ParseFiles(path + "artists.html"))
-	var concerts = template.Must(template.ParseFiles(path + "concerts.html"))
-	return home, artists, concerts
+func loadEvents(mux *http.ServeMux, pages []Page) {
+	for i := 0; i < len(pages); i++ {
+		loadPage(mux, &pages[i])
+	}
 }
 
 func StartServer() {
-	var homePage, artistsPage, concertsPage = loadTemplates("./templates/")
-	homeEvent(homePage)
-	artistsEvent(artistsPage)
-	concertsEvent(concertsPage)
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
+	mux := http.NewServeMux()
+	mux.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
+	pages := []Page{{"/", "index", "topfive"}, {"/artists", "artists", "artists"}, {"/concerts", "concerts", "concerts"}}
+	loadEvents(mux, pages)
 	fmt.Println("URL: http://localhost:8080/")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatal(err)
-	}
+	log.Fatal(http.ListenAndServe(":8080", mux))
 }

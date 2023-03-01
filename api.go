@@ -62,6 +62,18 @@ type Concerts struct {
 	Relation Relation
 }
 
+func GetApi(name string) any {
+	switch name {
+	case "topfive":
+		return GetTopFive()
+	case "artists":
+		return UnMarshallArtists(GetArtists())
+	case "concerts":
+		return GetConcerts()
+	}
+	return nil
+}
+
 /*---------------------- Artist API ----------------------*/
 
 func GetArtists() []byte {
@@ -247,3 +259,61 @@ func GetConcerts() *Concerts {
 	concerts := Concerts{Artists: artists, Relation: relation}
 	return &concerts
 }
+
+/*---------------------- Sort ----------------------*/
+
+func AlphabeticalSort(List Artists) Artists {
+	for n := 1; n < len(List); n++ {
+		if List[n].Name < List[n-1].Name {
+			List[n-1], List[n] = List[n], List[n-1]
+			return AlphabeticalSort(List)
+		}
+	}
+	return List
+}
+
+func CreationDateSort(List Artists) Artists {
+	for n := 1; n < len(List); n++ {
+		if List[n].CreationDate < List[n-1].CreationDate {
+			List[n-1], List[n] = List[n], List[n-1]
+			return CreationDateSort(List)
+		}
+	}
+	return List
+}
+
+func GetSort(name string) any {
+	switch name {
+	case "date":
+		return CreationDateSort(UnMarshallArtists(GetArtists()))
+	case "alpha":
+		return AlphabeticalSort(UnMarshallArtists(GetArtists()))
+	}
+	return nil
+}
+
+// func fastSort(list Artists, first int, last int) Artists {
+// 	var pivot int
+// 	var j int
+// 	var i int
+// 	if first < last {
+// 		pivot = first
+// 		i = first
+// 		j = last
+// 		for i < j {
+// 			for list[i].Name <= list[pivot].Name && i < last {
+// 				i++
+// 			}
+// 			for list[j].Name > list[pivot].Name {
+// 				j--
+// 			}
+// 			if i < j {
+// 				list[i], list[j] = list[j], list[i]
+// 			}
+// 		}
+// 		list[pivot], list[j] = list[j], list[pivot]
+// 		fastSort(list, first, j-1)
+// 		fastSort(list, j+1, last)
+// 	}
+// 	return list
+// }
