@@ -4,27 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/concert.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@400;500;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet"
+    />
     <title>Concerts</title>
 </head>
 <body>
-    {{ $base := . }}
-    {{ range $index := $base.Relation.Index }}
-        {{ range $artist := $base.Artists }}
-            {{ if eq $index.ID $artist.Id }}
-                <div>
-                    <h3>Name : {{ $artist.Name }}</h3>
-                    {{ range $place, $dates := $index.DatesLocations }}
-                        <h4>Place : {{ $place }}</h4>
-                        <h4>Dates :</h4>
-                        {{ range $date := $dates }}
-                            <p>{{ $date }}</p>
-                        {{ end }}
-                    {{ end }}
-                </div>
-                <br>
-                <br>
+    <div class="globalCardContainer containerRow">
+        {{ $base := . }}
+        {{ range $index := $base.Relation.Index }}
+            {{ range $artist := $base.Artists }}
+                {{ if eq $index.ID $artist.Id }}
+                    <div class="containerCol containerCard">
+                        <h3 class="titleGroup" >{{ $artist.Name }}</h3>
+                        <div class="cardConcert containerRow">
+                        {{ range $place, $dates := $index.DatesLocations }}
+                            <div class="containerRow cardLocation">
+                                <img class="imageLoc" src="https://picsum.photos/id/237/200/300" alt="maps Image">
+                                <div class="containerCol">
+                                    <div class="containerRow">
+                                        <span class="material-symbols-outlined loc">location_on</span>
+                                        <h4 class="textLocation">{{ $place }}</h4>
+                                    </div>
+                                    <span class="underline"></span>
+                                    <div class="containerCol containerDate">
+                                    {{ range $date := $dates }}
+                                        <p class="textIndent">{{ $date }}</p>
+                                    {{ end }}
+                                    </div>
+                                </div>
+                            </div>
+                            {{ end }}
+                            
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                {{ end }}
             {{ end }}
         {{ end }}
-    {{ end }}
+    </div>
 </body>
 </html>
