@@ -38,6 +38,7 @@ func loadEvents(mux *http.ServeMux, pages []Page) {
 func StartServer() {
 	mux := http.NewServeMux()
 	mux.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
+	mux.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("scripts/"))))
 	pages := []Page{{"/", "index", "topfive"}, {"/artists", "artists", "artists"}, {"/concerts", "concerts", "concerts"}}
 	loadEvents(mux, pages)
 	fmt.Println("URL: http://localhost:8080/")
