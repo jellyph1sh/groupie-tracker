@@ -23,11 +23,11 @@
                         <div class="cardConcert containerRow">
                         {{ range $place, $dates := $index.DatesLocations }}
                             <div class="containerRow cardLocation">
-                                <img class="imageLoc" src="https://picsum.photos/id/237/200/300" alt="maps Image">
+                                <img class="imageLoc" src="{{ $artist.Image }}" alt="maps Image">
                                 <div class="containerCol">
                                     <div class="containerRow">
                                         <span class="material-symbols-outlined loc">location_on</span>
-                                        <h4 class="textLocation">{{ $place }}</h4>
+                                        <h4 class="textLocation"><a href="https://www.google.com/maps/place/{{ $place }}" target="_blank" rel="noopener noreferrer">{{ $place }}</a></h4>
                                     </div>
                                     <span class="underline"></span>
                                     <div class="containerCol containerDate">
