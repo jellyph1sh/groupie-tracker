@@ -17,7 +17,15 @@ body{
 
 @media (max-width: 400px) {
     .sortStyle{
+        margin: auto;
         justify-content: center;
+        flex-direction: column;
+        width: min-content;
+        min-width: 15rem;
+    }
+    .imgStyle{
+        height: 11rem;
+        width: 18rem;
     }
   }
   
@@ -25,6 +33,11 @@ body{
     .sortStyle{
         justify-content: flex-start;
         margin-left: 4rem;
+        flex-direction: row;
+    }
+    .imgStyle{
+        height: 15rem;
+        width: 20rem;
     }
   }
 
@@ -67,8 +80,6 @@ body{
 /*----------------------- Card -----------------------*/
 
 .imgStyle{
-    width: 20rem;
-    height: 15rem;
     object-fit: cover;
     overflow: hidden;
     /* filter: grayscale(100%); */
@@ -100,13 +111,21 @@ body{
     white-space: pre-wrap
 }
 
-.members{
+.membersContainer{
     margin-top: -.8rem;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width:max-content;
+    width:auto;
     gap: 0rem;
+    white-space: pre-wrap;
+}
+
+.membersText{
+    white-space: pre-wrap; 
+    margin: 0; 
+    text-indent: 2rem; 
+    color: white;
 }
 
 /*----------------------- Content -----------------------*/
@@ -162,14 +181,14 @@ body{
 
 .sortStyle{
     display: flex;
-    flex-direction: row;
     gap: 1rem;
     padding-top: 5rem;
     margin-bottom: -2rem;
 }
 
 .buttonSort{
-    padding: 0.7rem 0.5rem;
+    padding: 0.6rem;
+    font-size: 1rem;
     background-color: rgb(37, 37, 37);
     color: white;
     font-weight: 600;
@@ -185,4 +204,34 @@ body{
     cursor: pointer;    
 }
 
+
+
 /*----------------------- Sort Styles -----------------------*/
+
+select {
+    padding: 0.2rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #252525;
+    color: whitesmoke;
+  }
+  
+  option {
+    padding: 0.2rem;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #444444;
+    color: whitesmoke;
+  }
+  
+  option:checked {
+    background-color: #969696;
+    color: whitesmoke;
+  }
+  
+  select:hover{
+    border-radius: 5px;
+    cursor: pointer;
+  }
+ 
