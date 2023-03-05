@@ -260,96 +260,87 @@ func GetConcerts() *Concerts {
 	return &concerts
 }
 
-/*---------------------- Sort ----------------------*/
+/*---------------------- Sorts ----------------------*/
 
-func GetSort(name string) Artists {
-	data := UnMarshallArtists(GetArtists())
-	switch name {
+func GetSort(sortName string) Artists {
+	data := UnMarshallArtists(GetArtists()) // A modifier si on ne veut pas rappeler à chaque fois l'api !!!
+	switch sortName {
 	case "alphabet":
-		return ExecutePartSort(data, "FindMiddlePart_Alphabet")
+		return quickSort(data, 0, len(data)-1, "partition_alphabet")
 	case "date":
-		return ExecutePartSort(data, "FindMiddlePart_CreationDate")
+		return quickSort(data, 0, len(data)-1, "partition_creationDate")
 	case "members":
-		return ExecutePartSort(data, "FindMiddlePart_Members")
+		return quickSort(data, 0, len(data)-1, "partition_Members")
 	}
 	return nil
 }
 
-/*---------------------- Creation Date Sort ----------------------*/
-
-func FindMiddlePart_CreationDate(List Artists, first int, last int) int {
-	middleNumber := List[last]
-	i := first
-	j := first
-	for j < last {
-		if List[j].CreationDate <= middleNumber.CreationDate {
-			List[i], List[j] = List[j], List[i]
-			i += 1
+func quickSort(list Artists, leftIndex int, rightIndex int, nameSort string) Artists {
+	var pivotIndex int // number to determine where to split the array
+	if leftIndex < rightIndex {
+		switch nameSort {
+		case "partition_alphabet":
+			pivotIndex = partition_Alphabet(list, leftIndex, rightIndex)
+		case "partition_creationDate":
+			pivotIndex = partition_CreationDate(list, leftIndex, rightIndex)
+		case "partition_Members":
+			pivotIndex = partition_Members(list, leftIndex, rightIndex)
 		}
-		j += 1
+		quickSort(list, leftIndex, pivotIndex-1, nameSort)  // sort left side of the array
+		quickSort(list, pivotIndex+1, rightIndex, nameSort) // sort right side of the array
 	}
-	List[last], List[i] = List[i], List[last]
-	return i
+	return list
 }
 
 /*---------------------- Creation Date Sort ----------------------*/
 
-/*---------------------- Alphabet Sort ----------------------*/
-
-func FindMiddlePart_Alphabet(List Artists, first int, last int) int {
-	middleNumber := List[last]
-	i := first
-	j := first
-	for j < last {
-		if List[j].Name <= middleNumber.Name {
-			List[i], List[j] = List[j], List[i]
+func partition_CreationDate(list Artists, left int, right int) int {
+	pivot := list[right]
+	i := left - 1
+	for j := left; j < right; j++ {
+		if list[j].CreationDate < pivot.CreationDate {
 			i++
+			list[i], list[j] = list[j], list[i]
 		}
-		j++
 	}
-	List[last], List[i] = List[i], List[last]
-	return i
+	list[i+1], list[right] = list[right], list[i+1]
+	return i + 1
+}
+
+/*---------------------- Creation Date Sort ----------------------*/
+
+/*---------------------- Alphabet Sort ----------------------*/
+
+func partition_Alphabet(list Artists, left int, right int) int {
+	pivot := list[right]
+	i := left - 1
+	for j := left; j < right; j++ {
+		if list[j].Name < pivot.Name {
+			i++
+			list[i], list[j] = list[j], list[i]
+		}
+	}
+	list[i+1], list[right] = list[right], list[i+1]
+	return i + 1
 }
 
 /*---------------------- Alphabet Sort ----------------------*/
 
 /*---------------------- Members Sort ----------------------*/
 
-func FindMiddlePart_Members(List Artists, first int, last int) int {
-	middleNumber := List[last]
-	i := first
-	j := first
-	for j < last {
-		if len(List[j].Members) <= len(middleNumber.Members) {
-			List[i], List[j] = List[j], List[i]
-			i += 1
+func partition_Members(list Artists, left int, right int) int {
+	pivot := list[right]
+	i := left - 1
+	for j := left; j < right; j++ {
+		if len(list[j].Members) < len(pivot.Members) {
+			i++
+			list[i], list[j] = list[j], list[i]
 		}
-		j += 1
 	}
-	List[last], List[i] = List[i], List[last]
-	return i
-}
-
-func RecursivePartitionSort(List Artists, first int, last int, nameSort string) {
-	var i int
-	switch nameSort {
-	case "FindMiddlePart_Alphabet":
-		i = FindMiddlePart_Alphabet(List, first, last)
-	case "FindMiddlePart_CreationDate":
-		i = FindMiddlePart_CreationDate(List, first, last)
-	case "FindMiddlePart_Members":
-		i = FindMiddlePart_Members(List, first, last)
-	}
-	if first < last {
-		RecursivePartitionSort(List, first, i-1, nameSort)
-		RecursivePartitionSort(List, i+1, last, nameSort)
-	}
-}
-
-func ExecutePartSort(List Artists, nameSort string) Artists {
-	fmt.Println(len(List) - 1)
-	RecursivePartitionSort(List, 0, len(List)-1, nameSort)
-	return List
+	list[i+1], list[right] = list[right], list[i+1]
+	return i + 1
 }
 
 /*---------------------- Members Sort ----------------------*/
+
+/*---------------------- Sorts ----------------------*/
