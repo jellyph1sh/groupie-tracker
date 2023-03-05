@@ -262,58 +262,94 @@ func GetConcerts() *Concerts {
 
 /*---------------------- Sort ----------------------*/
 
-func AlphabeticalSort(List Artists) Artists {
-	for n := 1; n < len(List); n++ {
-		if List[n].Name < List[n-1].Name {
-			List[n-1], List[n] = List[n], List[n-1]
-			return AlphabeticalSort(List)
-		}
-	}
-	return List
-}
-
-func CreationDateSort(List Artists) Artists {
-	for n := 1; n < len(List); n++ {
-		if List[n].CreationDate < List[n-1].CreationDate {
-			List[n-1], List[n] = List[n], List[n-1]
-			return CreationDateSort(List)
-		}
-	}
-	return List
-}
-
-func GetSort(name string) any {
+func GetSort(name string) Artists {
+	data := UnMarshallArtists(GetArtists())
 	switch name {
+	case "alphabet":
+		return ExecutePartSort(data, "FindMiddlePart_Alphabet")
 	case "date":
-		return CreationDateSort(UnMarshallArtists(GetArtists()))
-	case "alpha":
-		return AlphabeticalSort(UnMarshallArtists(GetArtists()))
+		return ExecutePartSort(data, "FindMiddlePart_CreationDate")
+	case "members":
+		return ExecutePartSort(data, "FindMiddlePart_Members")
 	}
 	return nil
 }
 
-// func fastSort(list Artists, first int, last int) Artists {
-// 	var pivot int
-// 	var j int
-// 	var i int
-// 	if first < last {
-// 		pivot = first
-// 		i = first
-// 		j = last
-// 		for i < j {
-// 			for list[i].Name <= list[pivot].Name && i < last {
-// 				i++
-// 			}
-// 			for list[j].Name > list[pivot].Name {
-// 				j--
-// 			}
-// 			if i < j {
-// 				list[i], list[j] = list[j], list[i]
-// 			}
-// 		}
-// 		list[pivot], list[j] = list[j], list[pivot]
-// 		fastSort(list, first, j-1)
-// 		fastSort(list, j+1, last)
-// 	}
-// 	return list
-// }
+/*---------------------- Creation Date Sort ----------------------*/
+
+func FindMiddlePart_CreationDate(List Artists, first int, last int) int {
+	middleNumber := List[last]
+	i := first
+	j := first
+	for j < last {
+		if List[j].CreationDate <= middleNumber.CreationDate {
+			List[i], List[j] = List[j], List[i]
+			i += 1
+		}
+		j += 1
+	}
+	List[last], List[i] = List[i], List[last]
+	return i
+}
+
+/*---------------------- Creation Date Sort ----------------------*/
+
+/*---------------------- Alphabet Sort ----------------------*/
+
+func FindMiddlePart_Alphabet(List Artists, first int, last int) int {
+	middleNumber := List[last]
+	i := first
+	j := first
+	for j < last {
+		if List[j].Name <= middleNumber.Name {
+			List[i], List[j] = List[j], List[i]
+			i++
+		}
+		j++
+	}
+	List[last], List[i] = List[i], List[last]
+	return i
+}
+
+/*---------------------- Alphabet Sort ----------------------*/
+
+/*---------------------- Members Sort ----------------------*/
+
+func FindMiddlePart_Members(List Artists, first int, last int) int {
+	middleNumber := List[last]
+	i := first
+	j := first
+	for j < last {
+		if len(List[j].Members) <= len(middleNumber.Members) {
+			List[i], List[j] = List[j], List[i]
+			i += 1
+		}
+		j += 1
+	}
+	List[last], List[i] = List[i], List[last]
+	return i
+}
+
+func RecursivePartitionSort(List Artists, first int, last int, nameSort string) {
+	var i int
+	switch nameSort {
+	case "FindMiddlePart_Alphabet":
+		i = FindMiddlePart_Alphabet(List, first, last)
+	case "FindMiddlePart_CreationDate":
+		i = FindMiddlePart_CreationDate(List, first, last)
+	case "FindMiddlePart_Members":
+		i = FindMiddlePart_Members(List, first, last)
+	}
+	if first < last {
+		RecursivePartitionSort(List, first, i-1, nameSort)
+		RecursivePartitionSort(List, i+1, last, nameSort)
+	}
+}
+
+func ExecutePartSort(List Artists, nameSort string) Artists {
+	fmt.Println(len(List) - 1)
+	RecursivePartitionSort(List, 0, len(List)-1, nameSort)
+	return List
+}
+
+/*---------------------- Members Sort ----------------------*/
