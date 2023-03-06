@@ -20,8 +20,13 @@
         </div>
       </nav>
     <form class="sortStyle" method="get" action="">
-        <button class="buttonSort" type="submit" name="sort" value="alpha">Alphabetical sorting</button>
-        <button class="buttonSort" type="submit" name="sort" value="date">Date sorting</button>
+        <select name="sort" id="">
+            <option selected disabled>Filters</option>
+            <option value="alphabet">Alphabetical sorting</option>
+            <option value="date">Date sorting</option>
+            <option value="members">Number of members sorting</option>
+        </select>
+        <button class="buttonSort" type="submit"> Apply sort</button>
     </form>
     <div class="cardsContainer">{{range .}}
         <div style="display:flex" class="card">
@@ -39,9 +44,9 @@
                     </div>
                     <div style="margin-bottom: 1rem;" class="underline"></div>
                 </div>
-                <div class="members">
+                <div class="membersContainer">
                     {{range .Members}}
-                        <p  style="margin: 0; text-indent: 2rem; color: white;">-{{.}}</p>  
+                        <p class="membersText">-{{.}}</p>  
                     {{end}}   
                 </div>
                 <div style="width: max-content;">
