@@ -67,7 +67,19 @@
                 <p class="text">Their first album was released the {{.FirstAlbum}}</p> 
             </div> 
         </div>                                     
-    {{end}}</div>
+    {{end}}
+    <form method="post" action="">
+        <button type="submit" name="switch" value="previous">Page précédente</button>
+        <ul>
+            <li><button type="submit" name="pagination" value="52">52</button></li>
+            <li><button type="submit" name="pagination" value="13">13</button></li>
+            <li><button type="submit" name="pagination" value="4">4</button></li>
+            <li><button type="submit" name="pagination" value="2">2</button></li>
+            <li><button type="submit" name="pagination" value="1">1</button></li>
+        </ul>
+        <button type="submit" name="switch" value="next">Page suivante</button>
+    </form>
+    </div>
     <footer class="containerFooter">
         <p class="contentFooter"> This is made for groupie tracker </p>
         <p class="contentFooter">Legal Mention : nope</p>
