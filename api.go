@@ -260,60 +260,87 @@ func GetConcerts() *Concerts {
 	return &concerts
 }
 
-/*---------------------- Sort ----------------------*/
+/*---------------------- Sorts ----------------------*/
 
-func AlphabeticalSort(List Artists) Artists {
-	for n := 1; n < len(List); n++ {
-		if List[n].Name < List[n-1].Name {
-			List[n-1], List[n] = List[n], List[n-1]
-			return AlphabeticalSort(List)
-		}
-	}
-	return List
-}
-
-func CreationDateSort(List Artists) Artists {
-	for n := 1; n < len(List); n++ {
-		if List[n].CreationDate < List[n-1].CreationDate {
-			List[n-1], List[n] = List[n], List[n-1]
-			return CreationDateSort(List)
-		}
-	}
-	return List
-}
-
-func GetSort(name string) any {
-	switch name {
+func GetSort(sortName string) Artists {
+	data := UnMarshallArtists(GetArtists()) // A modifier si on ne veut pas rappeler à chaque fois l'api !!!
+	switch sortName {
+	case "alphabet":
+		return quickSort(data, 0, len(data)-1, "partition_alphabet")
 	case "date":
-		return CreationDateSort(UnMarshallArtists(GetArtists()))
-	case "alpha":
-		return AlphabeticalSort(UnMarshallArtists(GetArtists()))
+		return quickSort(data, 0, len(data)-1, "partition_creationDate")
+	case "members":
+		return quickSort(data, 0, len(data)-1, "partition_Members")
 	}
 	return nil
 }
 
-// func fastSort(list Artists, first int, last int) Artists {
-// 	var pivot int
-// 	var j int
-// 	var i int
-// 	if first < last {
-// 		pivot = first
-// 		i = first
-// 		j = last
-// 		for i < j {
-// 			for list[i].Name <= list[pivot].Name && i < last {
-// 				i++
-// 			}
-// 			for list[j].Name > list[pivot].Name {
-// 				j--
-// 			}
-// 			if i < j {
-// 				list[i], list[j] = list[j], list[i]
-// 			}
-// 		}
-// 		list[pivot], list[j] = list[j], list[pivot]
-// 		fastSort(list, first, j-1)
-// 		fastSort(list, j+1, last)
-// 	}
-// 	return list
-// }
+func quickSort(list Artists, leftIndex int, rightIndex int, nameSort string) Artists {
+	var pivotIndex int // number to determine where to split the array
+	if leftIndex < rightIndex {
+		switch nameSort {
+		case "partition_alphabet":
+			pivotIndex = partition_Alphabet(list, leftIndex, rightIndex)
+		case "partition_creationDate":
+			pivotIndex = partition_CreationDate(list, leftIndex, rightIndex)
+		case "partition_Members":
+			pivotIndex = partition_Members(list, leftIndex, rightIndex)
+		}
+		quickSort(list, leftIndex, pivotIndex-1, nameSort)  // sort left side of the array
+		quickSort(list, pivotIndex+1, rightIndex, nameSort) // sort right side of the array
+	}
+	return list
+}
+
+/*---------------------- Creation Date Sort ----------------------*/
+
+func partition_CreationDate(list Artists, left int, right int) int {
+	pivot := list[right]
+	i := left - 1
+	for j := left; j < right; j++ {
+		if list[j].CreationDate < pivot.CreationDate {
+			i++
+			list[i], list[j] = list[j], list[i]
+		}
+	}
+	list[i+1], list[right] = list[right], list[i+1]
+	return i + 1
+}
+
+/*---------------------- Creation Date Sort ----------------------*/
+
+/*---------------------- Alphabet Sort ----------------------*/
+
+func partition_Alphabet(list Artists, left int, right int) int {
+	pivot := list[right]
+	i := left - 1
+	for j := left; j < right; j++ {
+		if list[j].Name < pivot.Name {
+			i++
+			list[i], list[j] = list[j], list[i]
+		}
+	}
+	list[i+1], list[right] = list[right], list[i+1]
+	return i + 1
+}
+
+/*---------------------- Alphabet Sort ----------------------*/
+
+/*---------------------- Members Sort ----------------------*/
+
+func partition_Members(list Artists, left int, right int) int {
+	pivot := list[right]
+	i := left - 1
+	for j := left; j < right; j++ {
+		if len(list[j].Members) < len(pivot.Members) {
+			i++
+			list[i], list[j] = list[j], list[i]
+		}
+	}
+	list[i+1], list[right] = list[right], list[i+1]
+	return i + 1
+}
+
+/*---------------------- Members Sort ----------------------*/
+
+/*---------------------- Sorts ----------------------*/
