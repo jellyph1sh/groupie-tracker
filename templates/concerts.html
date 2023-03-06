@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/concert.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link
     href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@400;500;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
@@ -13,6 +14,15 @@
     <title>Concerts</title>
 </head>
 <body>
+    <nav>
+        <label for="toggle">☰</label>
+        <input type="checkbox" id="toggle">
+        <div class="linkPages">
+            <a href="/concerts" >Concerts</a>
+            <a href="/" >Home</a>
+            <a href="/artists" >Artists</a>
+        </div>
+    </nav>
     <div class="globalCardContainer containerRow">
         {{ $base := . }}
         {{ range $index := $base.Relation.Index }}
@@ -25,8 +35,8 @@
                             <div class="containerRow cardLocation">
                                 <img class="imageLoc" src="{{ $artist.Image }}" alt="maps Image">
                                 <div class="containerCol">
-                                    <div class="containerRow">
-                                        <span class="material-symbols-outlined loc">location_on</span>
+                                    <div class="containerRow" id="marginContainerLocation">
+                                        <span class="material-symbols-outlined loc" >location_on</span>
                                         <h4 class="textLocation"><a href="https://www.google.com/maps/place/{{ $place }}" target="_blank" rel="noopener noreferrer">{{ $place }}</a></h4>
                                     </div>
                                     <span class="underline"></span>
@@ -47,5 +57,10 @@
             {{ end }}
         {{ end }}
     </div>
+    <footer class="containerFooter">
+        <p class="contentFooter"> This is made for groupie tracker </p>
+        <p class="contentFooter">Legal Mention : nope</p>
+        <p class="contentFooter">CGU : nope</p>
+    </footer> 
 </body>
 </html>
