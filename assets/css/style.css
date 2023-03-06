@@ -5,13 +5,13 @@ body{
 a{
   text-decoration: none;
   color: inherit;
-  color: aqua;
+  color: rgb(225,225,225);
   font-family: monospace;
   font-size: 20px;
 }
 
 a:hover {
-  color: white;
+  color: rgb(163, 219, 238);
 }
 
 /*---------------------- Footer ----------------------*/
@@ -19,7 +19,7 @@ footer {
   display: flex;
   justify-content: center;
   padding: 5px;
-  background-color: rgb(37, 37, 37);
+  background-color: rgb(21, 20, 25);
   color: #8b8888;
   margin-top: 3.45rem;
 }
@@ -62,18 +62,15 @@ nav{
   z-index: 999;
   width: 100%;
   padding: 1rem 0rem;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.714)
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.714);
+  background-color: rgb(21, 20, 25)
 }
 
 label, #toggle
 {
     display: none;
 }
-@media all and (min-width: 991px){ 
-  nav{
-    background-color: rgb(37, 37, 37)
-  }
-}
+
 @media all and (max-width: 991px){
   nav {
     padding: 0;
@@ -99,15 +96,15 @@ label, #toggle
     padding-bottom: 0.4rem;
     cursor: pointer;
     font-size: 2.4rem;
-    color: aqua;
-    background-color: rgb(37, 37, 37);
+    color: rgb(187, 232, 232);
+    background-color: rgb(21, 20, 25);
   }
 
   a{
     text-align: center;
     font-family: monospace;
     font-weight: bold;
-    color: aqua;
+    color: rgb(187, 232, 232);
   }
 
   #toggle:checked + .linkPages {
