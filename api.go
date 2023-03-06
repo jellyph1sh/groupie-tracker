@@ -251,7 +251,7 @@ func GetConcerts() *Concerts {
 /*---------------------- Sorts ----------------------*/
 
 func GetSort(sortName string) Artists {
-	data := UnMarshallArtists(GetArtists()) // A modifier si on ne veut pas rappeler à chaque fois l'api !!!
+	data := UnMarshallArtists(GetArtists())
 	switch sortName {
 	case "alphabet":
 		return quickSort(data, 0, len(data)-1, "partition_alphabet")
