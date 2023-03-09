@@ -189,6 +189,7 @@ body{
 .buttonSort{
     padding: 0.6rem;
     font-size: 1rem;
+    border: 2px solid rgb(21, 20, 25);
     background-color: rgb(21, 20, 25);
     color: white;
     font-weight: 600;
