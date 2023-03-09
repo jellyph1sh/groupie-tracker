@@ -27,17 +27,38 @@ body{
         height: 11rem;
         width: 18rem;
     }
+    .buttonNextPagination{
+        min-width: 6rem;
+    }
+    ul{
+        text-align: center;
+        margin-top: 0.2rem;
+    }
+    li{
+        display:inline-block;
+        flex-direction: row;
+        list-style-type: none;
+    }
   }
   
   @media (min-width: 400px) {
     .sortStyle{
         justify-content: flex-start;
-        margin-left: 4rem;
+        margin-left: 5rem;
         flex-direction: row;
     }
     .imgStyle{
         height: 15rem;
         width: 20rem;
+    }
+    .buttonNextPagination{
+        min-width: 9rem;
+        font-size:1rem;
+        padding: 0rem 0.5rem;
+    }
+    li{
+        display: inline-block;
+        list-style-type: none;
     }
   }
 
@@ -50,7 +71,7 @@ body{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     font-family: monospace;
     row-gap: 4rem;
     padding: 4rem;
@@ -194,7 +215,7 @@ body{
     color: white;
     font-weight: 600;
     font-family: monospace;
-    border-radius: 15px;
+    border-radius: 5px;
     min-width: 10rem;
     border: #333 2px solid;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.148)
@@ -236,3 +257,53 @@ select:hover{
     cursor: pointer;
 }
  
+/*----------------------- Sort Styles -----------------------*/
+
+/*----------------------- Pagination Styles -----------------------*/
+
+.buttonNextPagination{
+    background-color: rgb(21, 20, 25);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.148);
+    color: whitesmoke;
+    height: 3rem;
+    font-family: monospace;
+    
+}
+
+.buttonPagination:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.334);
+    cursor: pointer;    
+}
+.buttonNextPagination:hover{
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.334);
+    cursor: pointer; 
+}
+
+
+
+.buttonPagination{
+    background-color: rgb(21, 20, 25);
+    border-radius: 999px;
+    border: 2px solid white;
+    color: white;
+    min-width: 2rem;
+}
+
+.containerPagination{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+
+    justify-content: center;
+}
+
+#ulPagination{
+    margin-right: 2.5rem;
+}
+
+#formMargin{
+    padding-bottom: 5rem;
+}
+
+/*----------------------- Pagination Styles -----------------------*/
