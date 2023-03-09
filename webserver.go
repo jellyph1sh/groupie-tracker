@@ -60,11 +60,42 @@ func artistsPage(mux *http.ServeMux) {
 	})
 }
 
-func concertsHandler(w http.ResponseWriter, r *http.Request) {
+func concertsPage(mux *http.ServeMux) {
+	pagiId := 0
+	pagiInt := 0
 	template := loadTemplate("concerts")
-	data := GetConcerts()
-	r.ParseForm()
-	template.Execute(w, data)
+	mux.HandleFunc("/concerts", func(w http.ResponseWriter, r *http.Request) {
+		data := GetConcerts()
+		r.ParseForm()
+		if len(r.Form) != 0 {
+			if r.FormValue("pagination") != "" {
+				pagination := r.FormValue("pagination")
+				pagiId = 0
+				pagiInt = 0
+				for _, char := range pagination {
+					pagiInt *= 10
+					pagiInt += int(byte(char) - 48)
+				}
+				for i := 0; i < pagiInt; i++ {
+					data.Artists = data.Artists[pagiId:pagiInt]
+					data.Relation.Index = data.Relation.Index[pagiId:pagiInt]
+				}
+			} else if r.FormValue("switch") != "" {
+				if r.FormValue("switch") == "next" {
+					if pagiId+pagiInt < 52 {
+						pagiId += pagiInt
+					}
+				} else {
+					if pagiId-pagiInt >= 0 {
+						pagiId -= pagiInt
+					}
+				}
+				data.Artists = data.Artists[pagiId : pagiId+pagiInt]
+				data.Relation.Index = data.Relation.Index[pagiId : pagiId+pagiInt]
+			}
+		}
+		template.Execute(w, data)
+	})
 }
 
 func StartServer() {
@@ -72,9 +103,9 @@ func StartServer() {
 	mux.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
 	mux.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("scripts/"))))
 
-	artistsPage(mux)
 	mux.HandleFunc("/", homeHandler)
-	mux.HandleFunc("/concerts", concertsHandler)
+	artistsPage(mux)
+	concertsPage(mux)
 
 	fmt.Println("URL: http://localhost:8080/")
 	log.Fatal(http.ListenAndServe(":8080", mux))

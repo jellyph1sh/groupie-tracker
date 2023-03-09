@@ -240,12 +240,12 @@ func UnMarshallDates(data []byte) Dates {
 
 /*---------------------- Dates API ----------------------*/
 
-func GetConcerts() *Concerts {
+func GetConcerts() Concerts {
 	relation := UnMarshallRelation(GetRelation())
 	SetDisplayDate(&relation)
 	artists := UnMarshallArtists(GetArtists())
 	concerts := Concerts{Artists: artists, Relation: relation}
-	return &concerts
+	return concerts
 }
 
 /*---------------------- Sorts ----------------------*/
