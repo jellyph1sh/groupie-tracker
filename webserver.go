@@ -68,6 +68,12 @@ func concertsPage(mux *http.ServeMux) {
 		data := GetConcerts()
 		r.ParseForm()
 		if len(r.Form) != 0 {
+			if r.FormValue("search") != "" {
+				searchRes := GetSearch(r.FormValue("search"))
+				if len(searchRes.Artists) != 0 {
+					data = searchRes
+				}
+			}
 			if r.FormValue("pagination") != "" {
 				pagination := r.FormValue("pagination")
 				pagiId = 0
