@@ -44,7 +44,7 @@ body{
   @media (min-width: 400px) {
     .sortStyle{
         justify-content: flex-start;
-        margin-left: 5rem;
+        margin-left: 10.8rem;
         flex-direction: row;
     }
     .imgStyle{
@@ -71,9 +71,10 @@ body{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     font-family: monospace;
     row-gap: 4rem;
+    column-gap:2rem;
     padding: 4rem;
 }
 
@@ -268,7 +269,6 @@ select:hover{
     color: whitesmoke;
     height: 3rem;
     font-family: monospace;
-    
 }
 
 .buttonPagination:hover {
