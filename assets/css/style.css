@@ -10,6 +10,7 @@ a{
   color: rgb(225,225,225);
   font-family: monospace;
   font-size: 20px;
+  margin-top: 0.3rem;
 }
 
 a:hover {
