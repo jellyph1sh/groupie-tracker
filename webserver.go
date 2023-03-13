@@ -12,6 +12,10 @@ func loadTemplate(pageName string) *template.Template {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		errorHandler(w, r, http.StatusNotFound)
+		return
+	}
 	template := loadTemplate("index")
 	data := GetTopFive()
 	template.Execute(w, data)
@@ -23,6 +27,10 @@ func artistsPage(mux *http.ServeMux) {
 	isSorted := false
 	template := loadTemplate("artists")
 	mux.HandleFunc("/artists", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/artists" {
+			errorHandler(w, r, http.StatusNotFound)
+			return
+		}
 		data := UnMarshallArtists(GetArtists())
 		r.ParseForm()
 		if len(r.Form) != 0 {
@@ -65,6 +73,10 @@ func concertsPage(mux *http.ServeMux) {
 	pagiInt := 0
 	template := loadTemplate("concerts")
 	mux.HandleFunc("/concerts", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/concerts" {
+			errorHandler(w, r, http.StatusNotFound)
+			return
+		}
 		data := GetConcerts()
 		r.ParseForm()
 		if len(r.Form) != 0 {
@@ -102,6 +114,13 @@ func concertsPage(mux *http.ServeMux) {
 		}
 		template.Execute(w, data)
 	})
+}
+
+func errorHandler(w http.ResponseWriter, r *http.Request, status int) {
+	if status == http.StatusNotFound {
+		template := loadTemplate("error404")
+		template.Execute(w, nil)
+	}
 }
 
 func StartServer() {
