@@ -5,65 +5,56 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link rel="stylesheet" href="../assets/css/home.css">
-  <link rel="stylesheet" href="../assets/css/style.css"> -->
+  <link rel="stylesheet" href="../assets/css/home.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/caroussel.css">
 
   <title class="tittle">Groupie-Tracker🎶</title>
 </head>
 <body>
-  <!-- <nav>
-    <label for="toggle">☰</label>
+  <nav>
+    <label class="labelNav" for="toggle">☰</label>
     <input type="checkbox" id="toggle">
     <div class="linkPages">
         <a href="/concerts" >Concerts</a>
         <a href="/" >Home</a>
         <a href="/artists" >Artists</a>
     </div>
-  </nav> -->
+  </nav>
 
-  <div class="container">
-    <input type="radio" name="slider" id="item-0" checked>
-    <input type="radio" name="slider" id="item-1">
-    <input type="radio" name="slider" id="item-2">
-    <input type="radio" name="slider" id="item-3">
-    <input type="radio" name="slider" id="item-4"> 
-    
-      <div class="cards">{{range $idx, $value := .}}
-        <label class="card" for="item-{{$idx}}" id="song-{{$idx}}">
-          <img class="ima" src="{{.Image}}" alt="song">
-        </label>
-        {{end}}
-      </div>
-     
-</div>
-
-  <!-- <div class="containerHome">{{range .}}
-    <div class="topFiveContainer">
-      <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
-      <p>{{.Name}}</p>
+  <div class="carroussel">
+    <div class="container">
+      <input type="radio" name="slider" id="item-0" checked>
+      <input type="radio" name="slider" id="item-1">
+      <input type="radio" name="slider" id="item-2">
+      <input type="radio" name="slider" id="item-3">
+      <input type="radio" name="slider" id="item-4"> 
+        <div class="cards">{{range $idx, $value := .}}
+          <label class="card" for="item-{{$idx}}" id="song-{{$idx}}">
+            <img class="ima" src="{{.Image}}" alt="song">
+          </label>
+          {{end}}
+        </div>
     </div>
-    {{end}} 
-  </div> -->
+  </div>
 
-
-  <!-- <div class="row1-container">
+  <div class="row1-container">
     <div class="box box-down cyan">
-      <h2>What it is?</h2>
+      <h2 style="color: whitesmoke;">What it is?</h2>
       <p>This website you can find some information on your favourites artists and there concerts all around you.  💿🌍 </p>
-      <img src="https://assets.codepen.io/2301174/icon-supervisor.svg" alt="">
+      <img class="imgAbout" src="https://assets.codepen.io/2301174/icon-supervisor.svg" alt="">
     </div>
 
     <div class="box box-down blue">
-      <h2>How does it work?</h2>
+      <h2  style="color: whitesmoke;">How does it work?</h2>
       <p>Uses data from a secure database and managen it with an API link to this website <br> 💻</p>
-      <img src="https://assets.codepen.io/2301174/icon-calculator.svg" alt="">
+      <img class="imgAbout" src="https://assets.codepen.io/2301174/icon-calculator.svg" alt="">
     </div>
   </div>
   <footer class="containerFooter">
     <p class="contentFooter">This is made for groupie tracker</p>
     <p class="contentFooter">Legal Mention : nope</p>
     <p class="contentFooter">CGU : nope</p>
-  </footer>  -->
+  </footer>  
 </body>
 </html>
