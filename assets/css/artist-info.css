@@ -1,7 +1,7 @@
 body{
     background-color: rgb(48, 47, 51);
     margin: 0;
-    font-family: monospace;
+    font-family: "poppins";
     color: whitesmoke;
 }
 
@@ -55,6 +55,7 @@ body{
     }
     #gapName{
         padding: 3rem;
+        margin-bottom: -3rem;
     }
     .content{
         gap: 8rem;
@@ -92,7 +93,6 @@ body{
 
 #gapName{
     gap: 8rem;
-
 }
 
 .columnContainer{
