@@ -21,27 +21,35 @@
   
   .box {
     border-radius: 5px;
-    box-shadow: 0px 30px 40px -20px var(--grayishBlue);
+    box-shadow: 0px 20px 40px -20px var(--grayishBlue);
     padding: 30px;
-    margin: 20px;  
+    margin: 20px; 
   }
   
-  img {
+  .imgAbout {
     float: right;
   }
   
   @media (max-width: 450px) {
     .box {
-        height: 200px;
+        height: 150px;
+        width: 200px;
+    }
+    .row1-container{
+      margin-top:7rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      font-family: monospace;
+      text-align: center;
+    }
+    .imgAbout{
+      display: none;
     }
   }
   
-  @media (max-width: 950px) and (min-width: 450px) {
-    .box {
-        text-align: center;
-        height: 180px;
-    }
-  }
   
   .cyan {
     border-top: 3px solid var(--cyan);
@@ -58,6 +66,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: 15rem;
+        gap: 8rem;
+        font-family: monospace;
+        padding-bottom: 15rem;
+        margin-left: 0.5rem;
     }
     .box-down {
         position: relative;

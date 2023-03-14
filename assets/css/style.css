@@ -70,7 +70,7 @@ nav{
   background-color: rgb(21, 20, 25)
 }
 
-label, #toggle
+.labelNav, #toggle
 {
     display: none;
 }
@@ -93,7 +93,7 @@ label, #toggle
     width: 50%;
   }
  
-  label {
+  .labelNav {
     display: flex;
     align-self: flex-start;
     padding-left: 1rem;
