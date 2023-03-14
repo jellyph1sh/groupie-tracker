@@ -4,41 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/artist-info.css"> 
     <title>Document</title>
 </head>
 <body>
-    <h1 class="title">{{.Name}}</h1>
-    <div style="width: max-content;">
-        <div class="containerTitle">
-            <span class="circle"></span>
-            <h2 class="title">Members :</h1>                       
-        </div>
-        <div style="margin-bottom: 1rem;" class="underline"></div>
+    <div class="rowContainer">
+        <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
+        <h1 class="groupName" >{{.Name}}</h1>
     </div>
-    <div class="membersContainer">
+    <span class="underline"></span>
+    <h2>Members :</h2>                       
+    <div >
         {{range .Members}}
-            <p class="membersText">-{{.}}</p>  
+            <p >-{{.}}</p>  
         {{end}}   
     </div>
-    <div style="width: max-content;">
-        <div class="containerTitle">
-            <span class="circle"></span>
-            <h2 class="title">Creation date :</h1>                       
-        </div>
-        <div style="margin-bottom: 1rem;" class="underline"></div>
-    </div>
-    <p class="text">The group was created in {{.CreationDate}}</p> 
-    <div style="width: max-content;">
-        <div class="containerTitle">
-            <span class="circle"></span>
-            <h2 class="title">First album :</h1>                       
-        </div>   
-        <div style="margin-bottom: 1rem;" class="underline"></div>
-     </div>    
+    <h2>Creation date :</h2>                       
+    <p >The group was created in {{.CreationDate}}</p> 
+    <h2>First album :</h2>                          
     <p class="text">Their first album was released the {{.FirstAlbum}}</p>
     <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/{{.SpotifyID}}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-     <form action="/artists" method="post">
+    <form action="/artists" method="post">
         <button type="submit">GET BACK!</button>
-     </form>
+    </form>
 </body>
 </html>
