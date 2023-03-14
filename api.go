@@ -24,7 +24,8 @@ type Artists []struct {
 }
 
 type Artist struct {
-	Id           int      `json:"id"`
+	Id           int `json:"id"`
+	SpotifyID    string
 	Image        string   `json:"image"`
 	Name         string   `json:"name"`
 	Members      []string `json:"members"`

@@ -21,6 +21,11 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	template.Execute(w, data)
 }
 
+func artistInfoHandler(w http.ResponseWriter, r *http.Request, artist Artist) {
+	template := loadTemplate("artist-info")
+	template.Execute(w, artist)
+}
+
 func artistsPage(mux *http.ServeMux) {
 	pagiId := 0
 	pagiInt := 0
@@ -34,6 +39,27 @@ func artistsPage(mux *http.ServeMux) {
 		data := UnMarshallArtists(GetArtists())
 		r.ParseForm()
 		if len(r.Form) != 0 {
+			if r.FormValue("info") != "" {
+				for i := 0; i < len(data); i++ {
+					if r.FormValue("info") == data[i].Name {
+						spotifyArtist := searchProfile(data[i].Name)
+						artist := Artist{
+							Id:           data[i].Id,
+							SpotifyID:    spotifyArtist.Artists.Artists[0].ID.String(),
+							Image:        data[i].Image,
+							Name:         data[i].Name,
+							Members:      data[i].Members,
+							CreationDate: data[i].CreationDate,
+							FirstAlbum:   data[i].FirstAlbum,
+							Locations:    data[i].Locations,
+							ConcertDates: data[i].ConcertDates,
+							Relations:    data[i].Relations,
+						}
+						artistInfoHandler(w, r, artist)
+						return
+					}
+				}
+			}
 			if r.FormValue("sort") != "" || isSorted {
 				data = GetSort(r.FormValue("sort"))
 				isSorted = true
