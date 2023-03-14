@@ -1,22 +1,42 @@
 
-
-html, body {
-  margin: 0;
-  padding: 0;
-
+body{
+  background-color: rgb(48, 47, 51);
+}
+@media all and (min-width: 991px){
+  .ima{
+    width: 350px;
+    height: 350px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.244)
+  }
+  .carroussel{
+   
+    padding: 30px 10px;
+    padding-top: 8rem;
+    margin-left: 4rem;
+  }
 }
 
-body {
-  display: flex;
+@media all and (max-width: 990px){
+  .ima{
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.244)
+  }
+  .carroussel{
+    padding-top: 8rem;
+    margin-right: 2rem;
+    margin-left: 4rem;
+  }
+}
 
+
+.carroussel{
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px 10px;
-  font-family: 'DM Sans', sans-serif;
-  transition: background .4s ease-in;
-  background-color: #c394f8;
 }
-
 
 
 input[type=radio] {
@@ -57,11 +77,7 @@ input[type=radio] {
   
 }
 
-.ima{
-  width: 350px;
-  height: 350px;
-  border-radius: 10px;
-}
+
 
 #item-0:checked ~ .cards #song-4, #item-1:checked ~ .cards #song-0, #item-2:checked ~ .cards #song-0,#item-3:checked ~ .cards #song-2,#item-4:checked ~ .cards #song-3 {
   transform: translatex(-80%) scale(.6);
