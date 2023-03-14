@@ -37,7 +37,6 @@ body{
         margin-left: 15rem;
         margin-right: 15em;
     }
-
     .h2Title{
         font-size: 4rem;
     }
@@ -64,7 +63,6 @@ body{
 }
 
 .marginGlobal{
-
     margin-bottom: 3rem;
 }
 
@@ -92,8 +90,6 @@ body{
     height: 0.5rem
 }
 
-
-
 #gapName{
     gap: 8rem;
 
@@ -113,8 +109,6 @@ body{
 .alignLeft{
     justify-content: flex-start;
 }
-
-
 
 .circle{
     background-color: whitesmoke;
@@ -136,10 +130,6 @@ body{
     margin-left: 2rem;
 }
 
-
-
-
-
 .spotify{
 
     border-radius:15px;
@@ -151,8 +141,6 @@ body{
     gap: 2rem;
     margin-left: 2rem;
 }
-
-
 
 a{
     text-decoration: none;
