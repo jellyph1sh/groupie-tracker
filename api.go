@@ -12,7 +12,6 @@ import (
 )
 
 type Artists []struct {
-	SpotifyID    string
 	Id           int      `json:"id"`
 	Image        string   `json:"image"`
 	Name         string   `json:"name"`
@@ -25,7 +24,8 @@ type Artists []struct {
 }
 
 type Artist struct {
-	Id           int      `json:"id"`
+	Id           int `json:"id"`
+	SpotifyID    string
 	Image        string   `json:"image"`
 	Name         string   `json:"name"`
 	Members      []string `json:"members"`
@@ -88,10 +88,6 @@ func UnMarshallArtists(data []byte) Artists {
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
-	}
-	for i := 0; i < len(tab); i++ {
-		spotifyArtist := searchProfile(tab[i].Name)
-		tab[i].SpotifyID = spotifyArtist.Artists.Artists[0].ID.String()
 	}
 	return tab
 }

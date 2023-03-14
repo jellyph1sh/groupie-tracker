@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="title">{{.Name}}</h1>
+    <div style="width: max-content;">
+        <div class="containerTitle">
+            <span class="circle"></span>
+            <h2 class="title">Members :</h1>                       
+        </div>
+        <div style="margin-bottom: 1rem;" class="underline"></div>
+    </div>
+    <div class="membersContainer">
+        {{range .Members}}
+            <p class="membersText">-{{.}}</p>  
+        {{end}}   
+    </div>
+    <div style="width: max-content;">
+        <div class="containerTitle">
+            <span class="circle"></span>
+            <h2 class="title">Creation date :</h1>                       
+        </div>
+        <div style="margin-bottom: 1rem;" class="underline"></div>
+    </div>
+    <p class="text">The group was created in {{.CreationDate}}</p> 
+    <div style="width: max-content;">
+        <div class="containerTitle">
+            <span class="circle"></span>
+            <h2 class="title">First album :</h1>                       
+        </div>   
+        <div style="margin-bottom: 1rem;" class="underline"></div>
+     </div>    
+    <p class="text">Their first album was released the {{.FirstAlbum}}</p>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/{{.SpotifyID}}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+     <form action="/artists" method="post">
+        <button type="submit">GET BACK!</button>
+     </form>
+</body>
+</html>
