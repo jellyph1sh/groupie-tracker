@@ -108,12 +108,6 @@ func GetTopFive() []Artist {
 		fmt.Println(err)
 		result = append(result, tab)
 	}
-
-	// fmt.Println(string(data))
-
-	fmt.Println("tab", tabNumb)
-	fmt.Println("res", result)
-
 	return result
 }
 
