@@ -92,31 +92,56 @@ func UnMarshallArtists(data []byte) Artists {
 }
 
 func GetTopFive() []Artist {
-	tab := RandNumber()
-	var temp Artist
+	url := "https://groupietrackers.herokuapp.com/api/artists/"
+	var tabNumb []int
+	tabNumb = randomNumber()
 	var result []Artist
-	for numb := 0; numb < len(tab); numb++ {
-		url := "https://groupietrackers.herokuapp.com/api/artists/"
-		url += strconv.Itoa(tab[numb])
-		req, _ := http.NewRequest("GET", url, nil)
+	for x := 0; x < len(tabNumb); x++ {
+		var tab Artist
+		furl := url
+		furl += strconv.Itoa(tabNumb[x])
+		req, _ := http.NewRequest("GET", furl, nil)
 		res, _ := http.DefaultClient.Do(req)
 		defer res.Body.Close()
-		body, _ := ioutil.ReadAll(res.Body)
-		json.Unmarshal([]byte(body), &temp)
-		result = append(result, temp)
+		data, _ := ioutil.ReadAll(res.Body)
+		err := json.Unmarshal([]byte(data), &tab)
+		fmt.Println(err)
+		result = append(result, tab)
 	}
+
+	// fmt.Println(string(data))
+
+	fmt.Println("tab", tabNumb)
+	fmt.Println("res", result)
+
 	return result
 }
 
-func RandNumber() []int {
-	var tabRandNumb []int
-	for i := 0; i <= 4; i++ {
-		rand.Seed(time.Now().UnixNano())
-		time.Sleep(1)
-		x := rand.Intn(50)
-		tabRandNumb = append(tabRandNumb, x)
+func randomNumber() []int {
+
+	rand.Seed(time.Now().UnixNano())
+
+	var blacklist []int
+	var number []int
+
+	for len(number) < 5 {
+		generated := false
+		for !generated {
+			found := false
+			randomNumber := rand.Intn(52) + 1
+			for i := 0; i < len(blacklist); i++ {
+				if blacklist[i] == randomNumber {
+					found = true
+				}
+			}
+			if !found {
+				number = append(number, randomNumber)
+				blacklist = append(blacklist, randomNumber)
+				generated = true
+			}
+		}
 	}
-	return tabRandNumb
+	return number
 }
 
 /*---------------------- Artist API ----------------------*/
