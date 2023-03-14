@@ -1,0 +1,63 @@
+body{
+    margin: 0;
+    background-color: rgb(57, 56, 61)
+}
+
+.globalContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 5rem;
+    text-align: center;
+}
+
+.errorTitle{
+    font-weight: bold;
+    font-size: 8rem;
+    font-family: monospace;
+    margin-bottom: 0;
+    color: rgb(0, 0, 0);
+    text-shadow: 0px 4px 4px rgb(254, 254, 254, 0.25);
+}
+
+.errorText{
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: monospace;
+    
+}
+
+.backButton{
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+}
+
+.backButtonText{
+    font-size: 1.2rem;
+    color: rgb(211, 203, 203);
+    font-family: monospace;
+    margin-top: 0rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.backArrow{
+    padding-top: 0rem;
+    margin-right: 1rem;
+    color: rgb(211, 203, 203);
+    font-weight: 900;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+
+.backButton:hover{
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}
