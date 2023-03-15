@@ -1,48 +1,68 @@
 body{
     margin: 0;
-    background-color: rgb(57, 56, 61)
+    background-color:rgb(48, 47, 51)
 }
 
 .globalContainer{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin: auto;
+    margin-top: 0;
     justify-content: center;
     align-items: center;
     height: 100%;
-    gap: 5rem;
+    gap: 1rem;
     text-align: center;
 }
 
 .errorTitle{
     font-weight: bold;
-    font-size: 8rem;
+    font-size: 5rem;
     font-family: monospace;
-    margin-bottom: 0;
-    color: rgb(0, 0, 0);
-    text-shadow: 0px 4px 4px rgb(254, 254, 254, 0.25);
-}
+    margin-top: 0;
+    color: rgba(3, 3, 3, 0);
+    animation: clignotement 0.5s infinite; 
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
 
 .errorText{
     font-size: 2rem;
-    font-weight: 900;
+    font-weight: bold;
+    font-weight: 500;
+    gap: 1rem;
     font-family: monospace;
-    
+    -webkit-text-stroke: 2px;
+    /* text-shadow: 4px 0px 4px rgb(255, 0, 0); */
 }
 
+
+@keyframes clignotement {
+    0% {
+      color: black;
+    }
+    50% {
+      color: red; 
+    }
+    100% {
+      color: black; 
+  }
+
+}
 .backButton{
     display: flex;
     flex-direction: row;
-    margin: 1rem;
 }
 
 .backButtonText{
     font-size: 1.2rem;
-    color: rgb(211, 203, 203);
+    color: red;
     font-family: monospace;
-    margin-top: 0rem;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 0rem;   
+}
+
+.backButtonText:hover{
+    color: red;
 }
 
 .backArrow{
@@ -60,4 +80,8 @@ body{
 
 a{
     text-decoration: none;
+}
+
+.gif{
+    border-radius: 8px;
 }
