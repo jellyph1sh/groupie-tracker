@@ -18,6 +18,10 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	template := loadTemplate("index")
 	data := GetTopFive()
+	if data == nil {
+		errorHandler(w, r, http.StatusInternalServerError)
+		return
+	}
 	template.Execute(w, data)
 }
 
@@ -36,7 +40,11 @@ func artistsPage(mux *http.ServeMux) {
 			errorHandler(w, r, http.StatusNotFound)
 			return
 		}
-		data := UnMarshallArtists(GetArtists())
+		data := GetArtistsData()
+		if data == nil {
+			errorHandler(w, r, http.StatusInternalServerError)
+			return
+		}
 		r.ParseForm()
 		if len(r.Form) != 0 {
 			if r.FormValue("info") != "" {
@@ -61,7 +69,7 @@ func artistsPage(mux *http.ServeMux) {
 				}
 			}
 			if r.FormValue("sort") != "" || isSorted {
-				data = GetSort(r.FormValue("sort"))
+				data = GetSort(r.FormValue("sort"), data)
 				isSorted = true
 			}
 			if r.FormValue("pagination") != "" {
@@ -104,6 +112,10 @@ func concertsPage(mux *http.ServeMux) {
 			return
 		}
 		data := GetConcerts()
+		if data.Artists == nil || data.Relation.Index == nil {
+			errorHandler(w, r, http.StatusInternalServerError)
+			return
+		}
 		r.ParseForm()
 		if len(r.Form) != 0 {
 			if r.FormValue("search") != "" {
@@ -145,6 +157,9 @@ func concertsPage(mux *http.ServeMux) {
 func errorHandler(w http.ResponseWriter, r *http.Request, status int) {
 	if status == http.StatusNotFound {
 		template := loadTemplate("error404")
+		template.Execute(w, nil)
+	} else if status == http.StatusInternalServerError {
+		template := loadTemplate("error500")
 		template.Execute(w, nil)
 	}
 }
