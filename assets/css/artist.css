@@ -1,7 +1,3 @@
-body{
-    background-color: rgb(48, 47, 51);
-}
-
 @keyframes onCard {
     from{
         transform: translateY(0px);
@@ -74,11 +70,8 @@ body{
 
 .cardsContainer{
     padding-top: 5rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
-    font-family: monospace;
+    font-family: "poppins";
     row-gap: 4rem;
     column-gap:2rem;
     padding: 4rem;
@@ -87,8 +80,6 @@ body{
 .card{
     -webkit-user-select:none;
     user-select: none;
-    display: flex;
-    flex-direction: column;
     overflow: hidden;
     max-width: 20rem;
     height:min-content;
@@ -110,7 +101,6 @@ body{
 .imgStyle{
     object-fit: cover;
     overflow: hidden;
-    /* filter: grayscale(100%); */
 }
 
 /*----------------------- Content -----------------------*/
@@ -120,23 +110,15 @@ body{
 }
 
 .content{  
-    display: flex;
-    position: relative;
-    flex-direction: column; 
-    justify-content: center;
-    align-items: center;
+    position: relative; 
     height:100%;
     padding: 1rem;
     background-color: rgb(21, 20, 25);
 }
 
-
 /*----------------------- Content -----------------------*/
 
 /*----------------------- Title Card -----------------------*/
-
-
-
 
 .title{
     text-align: center;
@@ -177,7 +159,7 @@ body{
     background-color: rgb(21, 20, 25);
     color: white;
     font-weight: 600;
-    font-family: monospace;
+    font-family: "poppins";
     border-radius: 5px;
     min-width: 10rem;
     border: #333 2px solid;
@@ -230,7 +212,7 @@ select:hover{
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.148);
     color: whitesmoke;
     height: 3rem;
-    font-family: monospace;
+    font-family: "poppins";
     border-style: none;
 }
 
@@ -242,8 +224,6 @@ select:hover{
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.334);
     cursor: pointer; 
 }
-
-
 
 .buttonPagination{
     background-color: rgb(21, 20, 25);
@@ -257,11 +237,8 @@ select:hover{
     display: flex;
     flex-direction: row;
     margin: auto;
-
     justify-content: center;
 }
-
-
 
 #formMargin{
     padding-bottom: 5rem;

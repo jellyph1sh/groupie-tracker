@@ -1,0 +1,30 @@
+body{
+    background-color: rgb(48, 47, 51);
+    margin: 0;
+    font-family: "poppins";
+}
+
+.rowContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.columnContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.alignCenter{
+    justify-content: center;
+    align-items: center;
+}
+
+.alignLeft{
+    justify-content: flex-start;
+}
+
+a{
+    text-decoration: none;
+}

@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets\css\artist.css">
     <link rel="stylesheet" href="assets\css\style.css">
+    <link rel="stylesheet" href="../assets/css/basic.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
     <script src="../scripts/onclick.js"></script>
-    <title>Artist</title>
+    <title>Artists</title>
 </head>
 <body>
     <nav>
@@ -28,15 +30,15 @@
         </select>
         <button class="buttonSort" type="submit"> Apply sort</button>
     </form>
-    <div class="cardsContainer">{{range .}}
-        <div style="display:flex" class="card">
+    <div class="rowContainer cardsContainer">{{range .}}
+        <div style="display:flex" class="card columnContainer">
             <div onclick="seeMore(this)">
                 <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
                 <div class="groupeName">
                     <h1 class="title">{{.Name}}</h1>
                 </div>
             </div>
-            <div class="content" id="hiddenContent">
+            <div class="content columnContainer alignCenter" id="hiddenContent">
                 <form action="" method="post">
                     <button class="buttonSeeMore" type="submit" name="info" value="{{.Name}}">See more</button>
                 </form>

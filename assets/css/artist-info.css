@@ -1,7 +1,4 @@
 body{
-    background-color: rgb(48, 47, 51);
-    margin: 0;
-    font-family: "poppins";
     color: whitesmoke;
 }
 
@@ -82,17 +79,11 @@ body{
 }
 
 .groupName{
-
     font-weight: 900;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.616) ;
-
 }
 
-.rowContainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
+
 .horizontalUnderline{
     background-color: whitesmoke;
     width: 100%;
@@ -101,21 +92,6 @@ body{
 
 #gapName{
     gap: 8rem;
-}
-
-.columnContainer{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
-.alignCenter{
-    justify-content: center;
-    align-items: center;
-}
-
-.alignLeft{
-    justify-content: flex-start;
 }
 
 .circle{
@@ -139,7 +115,6 @@ body{
 }
 
 .spotify{
-
     border-radius:15px;
     filter: grayscale(100%);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.616) ;
@@ -148,10 +123,6 @@ body{
 .gapSpotify{
     gap: 2rem;
     margin-left: 2rem;
-}
-
-a{
-    text-decoration: none;
 }
 
 .backButtonText{
