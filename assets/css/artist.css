@@ -71,7 +71,7 @@
 .cardsContainer{
     padding-top: 5rem;
     justify-content: center;
-    font-family: "poppins";
+    font-family: monospace;
     row-gap: 4rem;
     column-gap:2rem;
     padding: 4rem;
@@ -116,6 +116,7 @@
     background-color: rgb(21, 20, 25);
 }
 
+
 /*----------------------- Content -----------------------*/
 
 /*----------------------- Title Card -----------------------*/
@@ -159,7 +160,7 @@
     background-color: rgb(21, 20, 25);
     color: white;
     font-weight: 600;
-    font-family: "poppins";
+    font-family: monospace;
     border-radius: 5px;
     min-width: 10rem;
     border: #333 2px solid;
@@ -170,10 +171,6 @@
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.334);
     cursor: pointer;    
 }
-
-
-
-/*----------------------- Sort Styles -----------------------*/
 
 select {
     padding: 0.2rem;
@@ -212,7 +209,7 @@ select:hover{
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.148);
     color: whitesmoke;
     height: 3rem;
-    font-family: "poppins";
+    font-family: monospace;
     border-style: none;
 }
 
@@ -237,6 +234,7 @@ select:hover{
     display: flex;
     flex-direction: row;
     margin: auto;
+
     justify-content: center;
 }
 
