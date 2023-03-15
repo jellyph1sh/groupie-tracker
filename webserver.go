@@ -51,6 +51,10 @@ func artistsPage(mux *http.ServeMux) {
 				for i := 0; i < len(data); i++ {
 					if r.FormValue("info") == data[i].Name {
 						spotifyArtist := searchProfile(data[i].Name)
+						if spotifyArtist == nil {
+							errorHandler(w, r, http.StatusInternalServerError)
+							return
+						}
 						artist := Artist{
 							Id:           data[i].Id,
 							SpotifyID:    spotifyArtist.Artists.Artists[0].ID.String(),

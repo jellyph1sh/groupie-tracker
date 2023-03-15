@@ -2,8 +2,8 @@ package groupietracker
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
-	"log"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -13,18 +13,18 @@ import (
 func getAPIData(url string) []byte {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 		return nil
 	}
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 		return nil
 	}
 	defer res.Body.Close()
 	data, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 		return nil
 	}
 	return data
@@ -40,7 +40,7 @@ func unmarshalArtistsData(data []byte) Artists {
 	var artists Artists
 	err := json.Unmarshal([]byte(data), &artists)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 		return nil
 	}
 	return artists
@@ -60,7 +60,7 @@ func unmarshalRelation(data []byte) Relation {
 	var relation Relation
 	err := json.Unmarshal(data, &relation)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 		return Relation{}
 	}
 	return relation
@@ -78,7 +78,7 @@ func unmarshalLocations(data []byte) Locations {
 	var locations Locations
 	err := json.Unmarshal(data, &locations)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 		return Locations{}
 	}
 	return locations
@@ -96,7 +96,7 @@ func unmarshalDates(data []byte) Dates {
 	var dates Dates
 	err := json.Unmarshal(data, &dates)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 		return Dates{}
 	}
 	return dates
@@ -191,7 +191,7 @@ func GetTopFive() []Artist {
 		}
 		err := json.Unmarshal([]byte(data), &artist)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Println(err)
 			return nil
 		}
 		topFive = append(topFive, artist)
