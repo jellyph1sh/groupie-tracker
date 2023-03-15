@@ -2,205 +2,114 @@ package groupietracker
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
+	"log"
 	"math/rand"
 	"net/http"
-	"os"
 	"strconv"
 	"time"
 )
 
-type Artists []struct {
-	Id           int      `json:"id"`
-	Image        string   `json:"image"`
-	Name         string   `json:"name"`
-	Members      []string `json:"members"`
-	CreationDate int      `json:"creationDate"`
-	FirstAlbum   string   `json:"firstAlbum"`
-	Locations    string   `json:"locations"`
-	ConcertDates string   `json:"concertDates"`
-	Relations    string   `json:"relations"`
-}
-
-type Artist struct {
-	Id           int `json:"id"`
-	SpotifyID    string
-	Image        string   `json:"image"`
-	Name         string   `json:"name"`
-	Members      []string `json:"members"`
-	CreationDate int      `json:"creationDate"`
-	FirstAlbum   string   `json:"firstAlbum"`
-	Locations    string   `json:"locations"`
-	ConcertDates string   `json:"concertDates"`
-	Relations    string   `json:"relations"`
-}
-
-type Locations struct {
-	Index []struct {
-		ID        int      `json:"id"`
-		Locations []string `json:"locations"`
-		Dates     string   `json:"dates"`
+func getAPIData(url string) []byte {
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		log.Fatal(err)
+		return nil
 	}
-}
-
-type Dates []struct {
-	Index []struct {
-		ID    int      `json:"id"`
-		Dates []string `json:"dates"`
-	}
-}
-
-type Relation struct {
-	Index []struct {
-		ID             int                    `json:"id"`
-		DatesLocations map[string]interface{} `json:"datesLocations"`
-	} `json:"index"`
-}
-
-type Concerts struct {
-	Artists  Artists
-	Relation Relation
-}
-
-/*---------------------- Artist API ----------------------*/
-
-func GetArtists() []byte {
-	url := "https://groupietrackers.herokuapp.com/api/artists"
-	req, _ := http.NewRequest("GET", url, nil)
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatal(err)
+		return nil
 	}
 	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
+	data, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatal(err)
+		return nil
 	}
-	return body
+	return data
 }
 
-func UnMarshallArtists(data []byte) Artists {
-	var tab Artists
-	err := json.Unmarshal([]byte(data), &tab)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+/*------------------------------------------------------*/
+/*						Artists:						*/
+/*------------------------------------------------------*/
+func unmarshalArtistsData(data []byte) Artists {
+	if data == nil {
+		return nil
 	}
-	return tab
+	var artists Artists
+	err := json.Unmarshal([]byte(data), &artists)
+	if err != nil {
+		log.Fatal(err)
+		return nil
+	}
+	return artists
 }
 
-func GetTopFive() []Artist {
-	url := "https://groupietrackers.herokuapp.com/api/artists/"
-	var tabNumb []int
-	tabNumb = randomNumber()
-	var result []Artist
-	for x := 0; x < len(tabNumb); x++ {
-		var tab Artist
-		furl := url
-		furl += strconv.Itoa(tabNumb[x])
-		req, _ := http.NewRequest("GET", furl, nil)
-		res, _ := http.DefaultClient.Do(req)
-		defer res.Body.Close()
-		data, _ := ioutil.ReadAll(res.Body)
-		err := json.Unmarshal([]byte(data), &tab)
-		fmt.Println(err)
-		result = append(result, tab)
-	}
-	return result
+func GetArtistsData() Artists {
+	return unmarshalArtistsData(getAPIData("https://groupietrackers.herokuapp.com/api/artists"))
 }
 
-func randomNumber() []int {
-
-	rand.Seed(time.Now().UnixNano())
-
-	var blacklist []int
-	var number []int
-
-	for len(number) < 5 {
-		generated := false
-		for !generated {
-			found := false
-			randomNumber := rand.Intn(52) + 1
-			for i := 0; i < len(blacklist); i++ {
-				if blacklist[i] == randomNumber {
-					found = true
-				}
-			}
-			if !found {
-				number = append(number, randomNumber)
-				blacklist = append(blacklist, randomNumber)
-				generated = true
-			}
-		}
+/*------------------------------------------------------*/
+/*						Relation:						*/
+/*------------------------------------------------------*/
+func unmarshalRelation(data []byte) Relation {
+	if data == nil {
+		return Relation{}
 	}
-	return number
+	var relation Relation
+	err := json.Unmarshal(data, &relation)
+	if err != nil {
+		log.Fatal(err)
+		return Relation{}
+	}
+	return relation
 }
 
-/*---------------------- Artist API ----------------------*/
-
-/*---------------------- Location API ----------------------*/
-
-func GetLocations() []byte {
-	url := "https://groupietrackers.herokuapp.com/api/locations"
-	req, _ := http.NewRequest("GET", url, nil)
-	res, err := http.DefaultClient.Do(req)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	return body
+func GetRelationData() Relation {
+	return unmarshalRelation(getAPIData("https://groupietrackers.herokuapp.com/api/relation"))
 }
 
-func UnMarshallLocations(data []byte) Locations {
-	var tab Locations
-	err := json.Unmarshal(data, &tab)
+/*------------------------------------------------------*/
+/*						Locations:						*/
+/*------------------------------------------------------*/
+/*
+func unmarshalLocations(data []byte) Locations {
+	var locations Locations
+	err := json.Unmarshal(data, &locations)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatal(err)
+		return Locations{}
 	}
-	return tab
+	return locations
 }
 
-/*---------------------- Location API ----------------------*/
-
-/*---------------------- Relation API ----------------------*/
-
-func GetRelation() []byte {
-	url := "https://groupietrackers.herokuapp.com/api/relation"
-	req, _ := http.NewRequest("GET", url, nil)
-	res, err := http.DefaultClient.Do(req)
+func GetLocationsData() Locations {
+	return unmarshalLocations(getAPIData("https://groupietrackers.herokuapp.com/api/locations"))
+}
+*/
+/*------------------------------------------------------*/
+/*						Dates:							*/
+/*------------------------------------------------------*/
+/*
+func unmarshalDates(data []byte) Dates {
+	var dates Dates
+	err := json.Unmarshal(data, &dates)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatal(err)
+		return Dates{}
 	}
-	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	return body
+	return dates
 }
 
-func UnMarshallRelation(data []byte) Relation {
-	var tab Relation
-	err := json.Unmarshal(data, &tab)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	return tab
+func getDatesData() Dates {
+	return unmarshalDates(getAPIData("https://groupietrackers.herokuapp.com/api/dates"))
 }
-
-func SetDisplayDate(relation *Relation) Relation {
+*/
+/*------------------------------------------------------*/
+/*						Concerts:						*/
+/*------------------------------------------------------*/
+func setDisplayDate(relation *Relation) Relation {
 	for i := 0; i < len(relation.Index); i++ {
 		for place := range relation.Index[i].DatesLocations {
 			var newPlace = ""
@@ -226,129 +135,66 @@ func SetDisplayDate(relation *Relation) Relation {
 	return *relation
 }
 
-/*---------------------- Relation API ----------------------*/
-
-/*---------------------- Dates API ----------------------*/
-
-func GetDates() []byte {
-	url := "https://groupietrackers.herokuapp.com/api/dates"
-	req, _ := http.NewRequest("GET", url, nil)
-	res, err := http.DefaultClient.Do(req)
-	if err != nil {
-
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	return body
-}
-
-func UnMarshallDates(data []byte) Dates {
-	var tab Dates
-	err := json.Unmarshal(data, &tab)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	return tab
-}
-
-/*---------------------- Dates API ----------------------*/
-
 func GetConcerts() Concerts {
-	relation := UnMarshallRelation(GetRelation())
-	SetDisplayDate(&relation)
-	artists := UnMarshallArtists(GetArtists())
-	concerts := Concerts{Artists: artists, Relation: relation}
-	return concerts
-}
-
-/*---------------------- Sorts ----------------------*/
-
-func GetSort(sortName string) Artists {
-	data := UnMarshallArtists(GetArtists())
-	switch sortName {
-	case "alphabet":
-		return quickSort(data, 0, len(data)-1, "partition_alphabet")
-	case "date":
-		return quickSort(data, 0, len(data)-1, "partition_creationDate")
-	case "members":
-		return quickSort(data, 0, len(data)-1, "partition_Members")
+	relation := GetRelationData()
+	if relation.Index == nil {
+		return Concerts{}
 	}
-	return nil
-}
-
-func quickSort(list Artists, leftIndex int, rightIndex int, nameSort string) Artists {
-	var pivotIndex int // number to determine where to split the array
-	if leftIndex < rightIndex {
-		switch nameSort {
-		case "partition_alphabet":
-			pivotIndex = partition_Alphabet(list, leftIndex, rightIndex)
-		case "partition_creationDate":
-			pivotIndex = partition_CreationDate(list, leftIndex, rightIndex)
-		case "partition_Members":
-			pivotIndex = partition_Members(list, leftIndex, rightIndex)
-		}
-		quickSort(list, leftIndex, pivotIndex-1, nameSort)  // sort left side of the array
-		quickSort(list, pivotIndex+1, rightIndex, nameSort) // sort right side of the array
+	setDisplayDate(&relation)
+	artists := GetArtistsData()
+	if artists == nil {
+		return Concerts{}
 	}
-	return list
+	return Concerts{Artists: artists, Relation: relation}
 }
 
-/*---------------------- Creation Date Sort ----------------------*/
+/*------------------------------------------------------*/
+/*						Top Five:						*/
+/*------------------------------------------------------*/
+func generateRandomNumbers() []int {
+	var blacklist []int
+	var randomNumbers []int
 
-func partition_CreationDate(list Artists, left int, right int) int {
-	pivot := list[right]
-	i := left - 1
-	for j := left; j < right; j++ {
-		if list[j].CreationDate < pivot.CreationDate {
-			i++
-			list[i], list[j] = list[j], list[i]
+	rand.Seed(time.Now().UnixNano())
+
+	for len(randomNumbers) < 5 {
+		generated := false
+		for !generated {
+			found := false
+			number := rand.Intn(52) + 1
+			for i := 0; i < len(blacklist); i++ {
+				if blacklist[i] == number {
+					found = true
+				}
+			}
+			if !found {
+				randomNumbers = append(randomNumbers, number)
+				blacklist = append(blacklist, number)
+				generated = true
+			}
 		}
 	}
-	list[i+1], list[right] = list[right], list[i+1]
-	return i + 1
+	return randomNumbers
 }
 
-/*---------------------- Creation Date Sort ----------------------*/
-
-/*---------------------- Alphabet Sort ----------------------*/
-
-func partition_Alphabet(list Artists, left int, right int) int {
-	pivot := list[right]
-	i := left - 1
-	for j := left; j < right; j++ {
-		if list[j].Name < pivot.Name {
-			i++
-			list[i], list[j] = list[j], list[i]
+func GetTopFive() []Artist {
+	url := "https://groupietrackers.herokuapp.com/api/artists/"
+	randNbs := generateRandomNumbers()
+	var topFive []Artist
+	for x := 0; x < len(randNbs); x++ {
+		var artist Artist
+		modifiedURL := url
+		modifiedURL += strconv.Itoa(randNbs[x])
+		data := getAPIData(modifiedURL)
+		if data == nil {
+			return nil
 		}
-	}
-	list[i+1], list[right] = list[right], list[i+1]
-	return i + 1
-}
-
-/*---------------------- Alphabet Sort ----------------------*/
-
-/*---------------------- Members Sort ----------------------*/
-
-func partition_Members(list Artists, left int, right int) int {
-	pivot := list[right]
-	i := left - 1
-	for j := left; j < right; j++ {
-		if len(list[j].Members) < len(pivot.Members) {
-			i++
-			list[i], list[j] = list[j], list[i]
+		err := json.Unmarshal([]byte(data), &artist)
+		if err != nil {
+			log.Fatal(err)
+			return nil
 		}
+		topFive = append(topFive, artist)
 	}
-	list[i+1], list[right] = list[right], list[i+1]
-	return i + 1
+	return topFive
 }
-
-/*---------------------- Members Sort ----------------------*/
-
-/*---------------------- Sorts ----------------------*/
