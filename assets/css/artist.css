@@ -1,7 +1,3 @@
-body{
-    background-color: rgb(48, 47, 51);
-}
-
 @keyframes onCard {
     from{
         transform: translateY(0px);
@@ -74,9 +70,6 @@ body{
 
 .cardsContainer{
     padding-top: 5rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
     font-family: monospace;
     row-gap: 4rem;
@@ -87,8 +80,6 @@ body{
 .card{
     -webkit-user-select:none;
     user-select: none;
-    display: flex;
-    flex-direction: column;
     overflow: hidden;
     max-width: 20rem;
     height:min-content;
@@ -110,7 +101,6 @@ body{
 .imgStyle{
     object-fit: cover;
     overflow: hidden;
-    /* filter: grayscale(100%); */
 }
 
 /*----------------------- Content -----------------------*/
@@ -120,11 +110,7 @@ body{
 }
 
 .content{  
-    display: flex;
-    position: relative;
-    flex-direction: column; 
-    justify-content: center;
-    align-items: center;
+    position: relative; 
     height:100%;
     padding: 1rem;
     background-color: rgb(21, 20, 25);
@@ -134,9 +120,6 @@ body{
 /*----------------------- Content -----------------------*/
 
 /*----------------------- Title Card -----------------------*/
-
-
-
 
 .title{
     text-align: center;
@@ -189,10 +172,6 @@ body{
     cursor: pointer;    
 }
 
-
-
-/*----------------------- Sort Styles -----------------------*/
-
 select {
     padding: 0.2rem;
     font-size: 1rem;
@@ -243,8 +222,6 @@ select:hover{
     cursor: pointer; 
 }
 
-
-
 .buttonPagination{
     background-color: rgb(21, 20, 25);
     border-radius: 999px;
@@ -260,8 +237,6 @@ select:hover{
 
     justify-content: center;
 }
-
-
 
 #formMargin{
     padding-bottom: 5rem;

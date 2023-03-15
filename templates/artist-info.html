@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/artist-info.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
-    <link
-    href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@400;500;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet"
-    />
-    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/basic.css">
+    <link href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@400;500;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
+    <title>Artist-info</title>
 </head>
 <body>
     <div class="columnContainer alignLeft marginGlobal">
@@ -36,7 +34,7 @@
                 </div>
             </div>
             <span class="verticalUnderline"></span>
-            <div class="columnContainer">
+            <div class="columnContainer containerInformation">
                 <h2 class="h2Title">Informations:</h2> 
                 <p class="pText informationText">This band/artist was formed in {{.CreationDate}}, calling themselves {{.Name}}, their first album was released in {{.FirstAlbum}}, this album launched their career and brought them to where they are today. So a few years later, their career is where it is today. The fact that they are here on this site is a testament to the breadth and depth of their popularity.  </p>
             </div>
@@ -46,7 +44,6 @@
             <h2 class="h2Title">Check out their music:</h2>
             <iframe class="spotify" src="https://open.spotify.com/embed/artist/{{.SpotifyID}}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
-     
     </div>
 </body>
 </html>

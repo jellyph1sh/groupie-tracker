@@ -1,22 +1,20 @@
 body{
-    background-color: rgb(48, 47, 51);
-    margin: 0;
-    font-family: "poppins";
     color: whitesmoke;
 }
 
 @media (max-width: 700px) {
     .informationText{
-        width: 100%;
+        width: 17rem;
     }
     .spotify{
-        width: 20rem;
+        width: 15rem;
     }
     #gapName{
         padding: 0.5rem;
     }
     .groupName{
-        font-size: 3.75rem;
+        font-size: 3rem;
+        padding-left: 1rem;
     }
     .h2Title{
         font-size: 2rem;
@@ -25,7 +23,7 @@ body{
         padding: 2rem;
     }
     .imgStyle{
-        margin-left: 1rem;
+        margin-left: 2rem;
     }
     .groupName{
         margin: auto;
@@ -41,14 +39,16 @@ body{
         font-size: 4rem;
     }
     .groupName{
-        font-size: 10rem;
+        width: 25rem;
+        font-size: 4rem;
+        min-height: 20rem;
     }
     .verticalUnderline{
         background-color: whitesmoke;
         width: 0.3rem;
     }
     .informationText{
-        width: 45rem;
+        width: 32rem;
     }
     .spotify{
         width: 55rem;
@@ -61,6 +61,13 @@ body{
         gap: 8rem;
         padding: 2rem;
     }
+    .containerInformation{
+        width: 20rem;
+    }
+    .imgStyle{
+        width: 20rem;
+        height: 20rem;
+    }
 }
 
 .marginGlobal{
@@ -69,22 +76,14 @@ body{
 
 .imgStyle{
     border-radius: 20px;
-    width: 20rem;
-    height: 20rem;
 }
 
 .groupName{
-
     font-weight: 900;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.616) ;
-
 }
 
-.rowContainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
+
 .horizontalUnderline{
     background-color: whitesmoke;
     width: 100%;
@@ -93,21 +92,6 @@ body{
 
 #gapName{
     gap: 8rem;
-}
-
-.columnContainer{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
-.alignCenter{
-    justify-content: center;
-    align-items: center;
-}
-
-.alignLeft{
-    justify-content: flex-start;
 }
 
 .circle{
@@ -131,7 +115,6 @@ body{
 }
 
 .spotify{
-
     border-radius:15px;
     filter: grayscale(100%);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.616) ;
@@ -140,10 +123,6 @@ body{
 .gapSpotify{
     gap: 2rem;
     margin-left: 2rem;
-}
-
-a{
-    text-decoration: none;
 }
 
 .backButtonText{
@@ -173,3 +152,4 @@ a{
 .errorContainer{
     margin-top: 2rem;
 }
+

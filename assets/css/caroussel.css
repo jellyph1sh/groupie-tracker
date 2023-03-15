@@ -10,7 +10,6 @@ body{
     box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.244)
   }
   .carroussel{
-   
     padding: 30px 10px;
     padding-top: 8rem;
     margin-left: 4rem;
@@ -31,13 +30,11 @@ body{
   }
 }
 
-
 .carroussel{
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 
 input[type=radio] {
   display: none;
@@ -76,7 +73,6 @@ input[type=radio] {
 
   
 }
-
 
 
 #item-0:checked ~ .cards #song-4, #item-1:checked ~ .cards #song-0, #item-2:checked ~ .cards #song-0,#item-3:checked ~ .cards #song-2,#item-4:checked ~ .cards #song-3 {
