@@ -123,70 +123,26 @@ body{
     display: flex;
     position: relative;
     flex-direction: column; 
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     height:100%;
-    min-height: 22rem;
     padding: 1rem;
     background-color: rgb(21, 20, 25);
 }
 
 
-.text{
-    color: #ffffff;
-    text-align: left;
-    margin: 0;
-    margin-top: -0.5rem;
-    white-space: pre-wrap
-}
-
-.membersContainer{
-    margin-top: -.8rem;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width:auto;
-    gap: 0rem;
-    white-space: pre-wrap;
-}
-
-.membersText{
-    white-space: pre-wrap; 
-    margin: 0; 
-    text-indent: 2rem; 
-    color: white;
-}
-
 /*----------------------- Content -----------------------*/
 
 /*----------------------- Title Card -----------------------*/
 
-.containerTitle{
-    margin-top: -0.8rem;
-    display: flex; 
-    flex-direction: row; 
-    gap: 1rem;
-}
 
-.circle{
-    width: 1rem;
-    height: 1rem;
-    margin-top: 1.2rem;
-    border-radius: 999px;
-    background-color: whitesmoke;
-}
+
 
 .title{
     text-align: center;
     font-size: 1.2rem;
     font-weight: 600;
     color: whitesmoke;
-}
-
-.underline{
-    height: 0.2rem;
-    margin-top: -0.5rem;
-    border-radius: 999px;
-    background-color: whitesmoke;
 }
 
 .groupeName{
@@ -312,3 +268,16 @@ select:hover{
 }
 
 /*----------------------- Pagination Styles -----------------------*/
+
+.buttonSeeMore{
+    padding: 0.5rem 1rem;
+    border: #969696 2px solid;
+    border-radius: 999px;
+    background: transparent;
+    color: whitesmoke;
+}
+
+.buttonSeeMore:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.334);
+}

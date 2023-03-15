@@ -4,41 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/artist-info.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
+    <link
+    href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@400;500;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet"
+    />
     <title>Document</title>
 </head>
 <body>
-    <h1 class="title">{{.Name}}</h1>
-    <div style="width: max-content;">
-        <div class="containerTitle">
-            <span class="circle"></span>
-            <h2 class="title">Members :</h1>                       
+    <div class="columnContainer alignLeft marginGlobal">
+        <a class="rowContainer errorContainer" href="/artists">
+            <span class="material-symbols-outlined backArrow">arrow_back</span>
+            <p class="backButtonText">Back to Artist page</p>
+        </a>
+        <div class="rowContainer" id="gapName">
+            <img class="imgStyle" src="{{.Image}}" alt="groupeImage">
+            <h1 class="groupName" >{{.Name}}</h1>
         </div>
-        <div style="margin-bottom: 1rem;" class="underline"></div>
-    </div>
-    <div class="membersContainer">
-        {{range .Members}}
-            <p class="membersText">-{{.}}</p>  
-        {{end}}   
-    </div>
-    <div style="width: max-content;">
-        <div class="containerTitle">
-            <span class="circle"></span>
-            <h2 class="title">Creation date :</h1>                       
+        <span class="horizontalUnderline"></span>
+        <div class="rowContainer content">
+            <div class="columnContainer">
+                <h2 class="h2Title">Members:</h2>                       
+                <div class="columnContainer columnMembers">
+                    {{range .Members}}
+                    <div class="rowContainer">
+                        <span class="circle"></span>
+                        <p class="pText" >{{.}}</p>  
+                    </div>
+                    {{end}}   
+                </div>
+            </div>
+            <span class="verticalUnderline"></span>
+            <div class="columnContainer">
+                <h2 class="h2Title">Informations:</h2> 
+                <p class="pText informationText">This band/artist was formed in {{.CreationDate}}, calling themselves {{.Name}}, their first album was released in {{.FirstAlbum}}, this album launched their career and brought them to where they are today. So a few years later, their career is where it is today. The fact that they are here on this site is a testament to the breadth and depth of their popularity.  </p>
+            </div>
         </div>
-        <div style="margin-bottom: 1rem;" class="underline"></div>
+        <span class="horizontalUnderline "></span>
+        <div class="columnContainer alignLeft gapSpotify">
+            <h2 class="h2Title">Check out their music:</h2>
+            <iframe class="spotify" src="https://open.spotify.com/embed/artist/{{.SpotifyID}}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+     
     </div>
-    <p class="text">The group was created in {{.CreationDate}}</p> 
-    <div style="width: max-content;">
-        <div class="containerTitle">
-            <span class="circle"></span>
-            <h2 class="title">First album :</h1>                       
-        </div>   
-        <div style="margin-bottom: 1rem;" class="underline"></div>
-     </div>    
-    <p class="text">Their first album was released the {{.FirstAlbum}}</p>
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/{{.SpotifyID}}?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-     <form action="/artists" method="post">
-        <button type="submit">GET BACK!</button>
-     </form>
 </body>
 </html>
