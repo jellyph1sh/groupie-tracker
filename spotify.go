@@ -14,7 +14,7 @@ func searchProfile(profileName string) *spotify.SearchResult {
 	config := &clientcredentials.Config{
 		ClientID:     "",
 		ClientSecret: "",
-		TokenURL:     spotifyauth.TokenURL,
+		TokenURL:     "",
 	}
 	token, err := config.Token(ctx)
 	if err != nil {
